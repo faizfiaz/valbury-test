@@ -1,0 +1,110 @@
+name: base_flutter_2
+description: Base Flutter 2 MVVM
+
+# The following line prevents the package from being accidentally published to
+# pub.dev using `pub publish`. This is preferred for private packages.
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+# The following defines the version and build number for your application.
+# A version number is three numbers separated by dots, like 1.2.43
+# followed by an optional build number separated by a +.
+# Both the version and the builder number may be overridden in flutter
+# build by specifying --build-name and --build-number, respectively.
+# In Android, build-name is used as versionName while build-number used as versionCode.
+# Read more about Android versioning at https://developer.android.com/studio/publish/versioning
+# In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
+# Read more about iOS versioning at
+# https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.7.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  cupertino_icons: ^1.0.2
+
+  #Base App Needed
+  #Technical
+  dio: ^4.0.0 #Connection Manager
+  http: ^0.13.1 #Base Connection
+  flutter_dotenv: ^4.0.0-nullsafety.0 #For env properties
+  pull_to_refresh: ^1.6.5 #Add functionality pull refresh for list
+  flutter_secure_storage: ^4.1.0 #For saving session user safely, better than shared preference
+  shared_preferences: ^2.0.5 #For saving non secure data
+  need_resume: ^1.0.5+1 #Add lifecycle in Flutter App
+  flutter_inappwebview: ^5.3.2 #Webview Android & IOS
+  loadmore: ^2.0.1 #Add functionality load more for list
+  url_launcher: ^6.0.3 #For launching a URL
+  flutter_local_notifications: ^5.0.0+1 #Handle Notification
+  encrypt: ^5.0.0 #For Encryption
+  provider: ^5.0.0 #State Management
+
+  #UI
+  flutter_svg: ^0.21.0+1 #For render SVG Assets
+  flutter_icons: ^1.1.0 #Rich icon see documentation for availability Icons https://pub.dev/packages/flutter_icons
+  introduction_screen: ^2.1.0 #Standar Intro app
+  flutter_form_builder: ^6.0.0-nullsafety.1 #Form Builder
+  rflutter_alert: ^2.0.2 #Alert Dialog
+  dots_indicator: ^2.0.0 #Dots Indicator for page view
+  fluttertoast: ^8.0.3 #Toast
+  carousel_slider: ^4.0.0-nullsafety.0 #Image Carousel
+  photo_view: ^0.11.1 #Enlarge Image with zoom function
+
+  #Firebase Dependency
+  firebase_crashlytics: ^2.0.0 #Crash Reporting
+  firebase_core: ^1.0.3 #Firebase Core Dep
+  firebase_messaging: ^9.1.1 #Firebase Cloud Messaging Functionality
+
+  #Social Login
+  google_sign_in: ^5.0.1 #Add Google Login
+  flutter_facebook_login: ^3.0.0 #Add Facebook Login
+  sign_in_with_apple: ^3.0.0 #Add Apple Login
+
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+# For information on the generic Dart part of this file, see the
+# following page: https://dart.dev/tools/pub/pubspec
+
+# The following section is specific to Flutter.
+flutter:
+
+  # The following line ensures that the Material Icons font is
+  # included with your application, so that you can use the icons in
+  # the material Icons class.
+  uses-material-design: true
+  assets:
+    - assets/
+    - assets/certs/
+    - assets/images/
+    - assets/icons/
+    - assets/json/
+    - .env
+
+  fonts:
+    - family: Poppins
+      fonts:
+        - asset: assets/fonts/Poppins-Regular.ttf
+        - asset: assets/fonts/Poppins-Light.ttf
+          weight: 400
+        - asset: assets/fonts/Poppins-Medium.ttf
+          weight: 600
+        - asset: assets/fonts/Poppins-SemiBold.ttf
+          weight: 700
+        - asset: assets/fonts/Poppins-Bold.ttf
+          weight: 800
+        - asset: assets/fonts/Poppins-ExtraBold.ttf
+          weight: 900
+        - asset: assets/fonts/Poppins-Italic.ttf
+          style: italic
+        - asset: assets/fonts/Poppins-SemiBoldItalic.ttf
+          weight: 600
+          style: italic
+
+  # For details regarding fonts from package dependencies,
+  # see https://flutter.dev/custom-fonts/#from-packages
