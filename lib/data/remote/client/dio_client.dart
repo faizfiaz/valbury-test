@@ -1,11 +1,11 @@
 import 'dart:io';
 
-import 'package:base_flutter_2/commons/multilanguage.dart';
-import 'package:base_flutter_2/commons/nav_key.dart';
-import 'package:base_flutter_2/commons/other_utils.dart';
-import 'package:base_flutter_2/commons/screen_utils.dart';
-import 'package:base_flutter_2/data/local/user_preferences.dart';
-import 'package:base_flutter_2/data/remote/endpoints/endpoints.dart';
+import 'package:terkelola/commons/multilanguage.dart';
+import 'package:terkelola/commons/nav_key.dart';
+import 'package:terkelola/commons/other_utils.dart';
+import 'package:terkelola/commons/screen_utils.dart';
+import 'package:terkelola/data/local/user_preferences.dart';
+import 'package:terkelola/data/remote/endpoints/endpoints.dart';
 import 'package:dio/adapter.dart';
 import 'package:dio/dio.dart';
 import 'package:encrypt/encrypt.dart';

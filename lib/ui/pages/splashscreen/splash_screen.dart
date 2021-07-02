@@ -1,8 +1,8 @@
 import 'dart:async';
 
-import 'package:base_flutter_2/commons/multilanguage.dart';
-import 'package:base_flutter_2/constants/colors.dart';
-import 'package:base_flutter_2/usecases/user/user_usecase.dart';
+import 'package:terkelola/commons/multilanguage.dart';
+import 'package:terkelola/constants/colors.dart';
+import 'package:terkelola/usecases/user/user_usecase.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart' as environment;
 import 'package:shared_preferences/shared_preferences.dart';

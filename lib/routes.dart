@@ -1,4 +1,4 @@
-import 'package:base_flutter_2/ui/pages/splashscreen/splash_screen.dart';
+import 'package:terkelola/ui/pages/splashscreen/splash_screen.dart';
 import 'package:flutter/material.dart';
 
 final routes = {

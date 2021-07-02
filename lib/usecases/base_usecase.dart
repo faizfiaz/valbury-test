@@ -1,9 +1,9 @@
 import 'dart:convert';
 
-import 'package:base_flutter_2/commons/multilanguage.dart';
-import 'package:base_flutter_2/model/error/error_dynamic.dart';
-import 'package:base_flutter_2/model/error/error_message.dart';
-import 'package:base_flutter_2/repository/base_repository.dart';
+import 'package:terkelola/commons/multilanguage.dart';
+import 'package:terkelola/model/error/error_dynamic.dart';
+import 'package:terkelola/model/error/error_message.dart';
+import 'package:terkelola/repository/base_repository.dart';
 
 abstract class BaseUsecase<R extends BaseRepository> {
   R repository;

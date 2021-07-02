@@ -1,12 +1,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.selfcompany.faiz.base_flutter_2">
+    package="id.co.terkelola.app">
 
     <application
-        android:name="com.selfcompany.faiz.base_flutter_2.Application"
+        android:name="id.co.terkelola.app.Application"
         android:icon="@mipmap/ic_launcher"
-        android:label="base_flutter_2">
+        android:label="Terkelola">
         <activity
-            android:name=".MainActivity"
+            android:name="id.co.terkelola.app.MainActivity"
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
             android:hardwareAccelerated="true"
             android:launchMode="singleTop"

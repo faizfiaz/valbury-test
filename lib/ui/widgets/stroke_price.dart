@@ -1,4 +1,4 @@
-import 'package:base_flutter_2/constants/colors.dart';
+import 'package:terkelola/constants/colors.dart';
 import 'package:flutter/material.dart';
 
 class StrokePrice extends CustomPainter {

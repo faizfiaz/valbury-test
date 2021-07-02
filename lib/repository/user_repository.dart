@@ -1,6 +1,6 @@
-import 'package:base_flutter_2/data/remote/client/dio_client.dart';
-import 'package:base_flutter_2/data/remote/endpoints/user_endpoints.dart';
-import 'package:base_flutter_2/model/response/response_login.dart';
+import 'package:terkelola/data/remote/client/dio_client.dart';
+import 'package:terkelola/data/remote/endpoints/user_endpoints.dart';
+import 'package:terkelola/model/response/response_login.dart';
 import 'package:flutter/material.dart';
 
 import 'base_repository.dart';

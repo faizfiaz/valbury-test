@@ -1,11 +1,11 @@
 import 'dart:convert';
 
-import 'package:base_flutter_2/commons/base_view_model.dart';
-import 'package:base_flutter_2/commons/email_validator.dart';
-import 'package:base_flutter_2/data/remote/endpoints/endpoints.dart';
-import 'package:base_flutter_2/model/entity/facebook_data.dart';
-import 'package:base_flutter_2/repository/user_repository.dart';
-import 'package:base_flutter_2/usecases/user/user_usecase.dart';
+import 'package:terkelola/commons/base_view_model.dart';
+import 'package:terkelola/commons/email_validator.dart';
+import 'package:terkelola/data/remote/endpoints/endpoints.dart';
+import 'package:terkelola/model/entity/facebook_data.dart';
+import 'package:terkelola/repository/user_repository.dart';
+import 'package:terkelola/usecases/user/user_usecase.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_facebook_login/flutter_facebook_login.dart';
 import 'package:google_sign_in/google_sign_in.dart';

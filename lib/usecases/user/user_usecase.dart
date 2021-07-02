@@ -1,7 +1,7 @@
-import 'package:base_flutter_2/data/local/user_preferences.dart';
-import 'package:base_flutter_2/model/error/error_message.dart';
-import 'package:base_flutter_2/model/response/response_login.dart';
-import 'package:base_flutter_2/repository/user_repository.dart';
+import 'package:terkelola/data/local/user_preferences.dart';
+import 'package:terkelola/model/error/error_message.dart';
+import 'package:terkelola/model/response/response_login.dart';
+import 'package:terkelola/repository/user_repository.dart';
 
 import 'i_user_usecase.dart';
 

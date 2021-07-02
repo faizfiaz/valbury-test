@@ -1,4 +1,4 @@
-package com.selfcompany.faiz.base_flutter_2
+package id.co.terkelola.app
 
 import android.os.Bundle
 import io.flutter.embedding.android.FlutterActivity

@@ -1,4 +1,4 @@
-package com.selfcompany.faiz.base_flutter_2
+package id.co.terkelola.app
 
 import com.dexterous.flutterlocalnotifications.FlutterLocalNotificationsPlugin
 import io.flutter.app.FlutterApplication

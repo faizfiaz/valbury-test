@@ -1,5 +1,5 @@
 
-import 'package:base_flutter_2/data/remote/client/dio_client.dart';
+import 'package:terkelola/data/remote/client/dio_client.dart';
 
 abstract class BaseRepository{
 

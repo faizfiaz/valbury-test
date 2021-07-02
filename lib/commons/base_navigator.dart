@@ -1,4 +1,4 @@
-import 'package:base_flutter_2/model/error/error_message.dart';
+import 'package:terkelola/model/error/error_message.dart';
 
 abstract class BaseNavigator {
   void setLoadingPage(bool condition);

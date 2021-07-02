@@ -1,5 +1,5 @@
-import 'package:base_flutter_2/constants/colors.dart';
-import 'package:base_flutter_2/model/error/error_message.dart';
+import 'package:terkelola/constants/colors.dart';
+import 'package:terkelola/model/error/error_message.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';

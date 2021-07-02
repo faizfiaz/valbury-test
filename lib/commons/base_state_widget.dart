@@ -1,5 +1,5 @@
-import 'package:base_flutter_2/commons/screen_utils.dart';
-import 'package:base_flutter_2/model/error/error_message.dart';
+import 'package:terkelola/commons/screen_utils.dart';
+import 'package:terkelola/model/error/error_message.dart';
 import 'package:flutter/material.dart';
 import 'package:need_resume/need_resume.dart';
 
