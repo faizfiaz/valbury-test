@@ -1,33 +1,22 @@
 import 'package:flutter/material.dart';
 
-const Color primary = Color(0xFFE53535);
-const Color primaryTrans = Color(0x30E53535);
-const Color secondary = Color(0xFFFD7F7F);
-const Color secondaryTrans = Color(0x20FD7F7F);
-const Color pageIntro = Color(0xFFB61A1C);
+const Color primary = Color(0xFFFB4B4E);
+const Color primaryTrans = Color(0x30FB4B4E);
+const Color secondary = Color(0xFFFFA737);
+const Color secondaryTrans = Color(0x30FFA737);
 const Color accent = Color(0xFF00579B);
-const Color mainBg = Color(0xFFECF0F1);
+const Color tertiary = Color(0xFF2F80ED);
+const Color success = Color(0xFF16C79A);
+const Color error = Color(0xFFF05454);
+const Color warning = Color(0xFFFFC453);
+const Color disabled = Color(0xFFE0E4EB);
+
 const Color white = Color(0xFFFFFFFF);
-const Color blackTrans = Color(0x55000000);
-const Color blackTransHigh = Color(0x70000000);
 const Color whiteTrans = Color(0x10000000);
 const Color whiteTransHigh = Color(0x30000000);
-const Color orange = Color(0xFFF57615);
-const Color greys = Color(0xFF8E8E93);
-const Color strokeGrey = Color(0x4c717271);
-const Color greysLight = Color(0xFFACACB2);
-const Color greysMedium = Color(0xFFF7F8FB);
-const Color greysButton = Color(0xFFEFEFF3);
-const Color greysBackground = Color(0xFFF1F1F1);
-const Color greysBackgroundMedium = Color(0xFFF2F3F7);
-const Color greysText = Color(0xFFD4D5D8);
-const Color greysMediumText = Color(0xFF707070);
-const Color pink = Color(0xFFFFCBCB);
-const Color darkGrey = Color(0xFF8E8E93);
-const Color greySearchBox = Color(0xFFD4D5D8);
-const Color yellow = Color(0xFFF1C02D);
-final List<Color> introBackground = [
-  Color(0xff452650),
-  Color(0xff009688),
-  Color(0xff3F51B5)
-];
+
+const Color black = Color(0x000000);
+const Color blackTrans = Color(0x55000000);
+const Color blackTransHigh = Color(0x70000000);
+
+const Color primaryText = Color(0xFF373939);

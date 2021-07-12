@@ -5,7 +5,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:flutter/services.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart' as environment;
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 import 'commons/nav_key.dart';
@@ -13,7 +13,7 @@ import 'constants/colors.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await environment.load(fileName: '.env');
+  await dotenv.load(fileName: '.env');
   await Firebase.initializeApp();
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
   // await getPEMKeyCert();
@@ -47,12 +47,12 @@ class _MyAppState extends State<MyApp> {
     initializeFirebase();
   }
 
-  Future<dynamic> onSelectNotification(String payload) async {
+  Future<dynamic> onSelectNotification(String? payload) async {
     /*Do whatever you want to do on notification click. In this case, I'll show an alert dialog*/
     showDialog(
       context: context,
       builder: (_) => AlertDialog(
-        title: Text(payload),
+        title: Text(payload!),
         content: Text("Payload: $payload"),
       ),
     );
@@ -70,7 +70,7 @@ class _MyAppState extends State<MyApp> {
             TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
           }),
           accentColor: accent,
-          fontFamily: "Poppins",
+          fontFamily: "NunitoSans",
           canvasColor: Colors.white),
       initialRoute: "/",
       routes: routes,
@@ -79,8 +79,8 @@ class _MyAppState extends State<MyApp> {
 
   static Future<void> _showNotification(
     int notificationId,
-    String notificationTitle,
-    String notificationContent,
+    String? notificationTitle,
+    String? notificationContent,
     String payload, {
     String channelId = '1234',
     String channelTitle = 'Android Channel',
@@ -152,7 +152,7 @@ class _MyAppState extends State<MyApp> {
       }
     });
 
-    NotificationSettings settings = await _firebaseMessaging.requestPermission(
+    NotificationSettings settings = await _firebaseMessaging.requestPermission( // ignore: unused_local_variable
       alert: true,
       announcement: false,
       badge: true,

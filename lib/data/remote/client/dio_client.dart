@@ -22,16 +22,17 @@ class DioClient {
   // Get:-----------------------------------------------------------------------
   Future<dynamic> get(
     String uri, {
-    Map<String, dynamic> queryParameters,
-    Options options,
-    CancelToken cancelToken,
-    ProgressCallback onReceiveProgress,
+    Map<String, dynamic>? queryParameters,
+    Options? options,
+    CancelToken? cancelToken,
+    ProgressCallback? onReceiveProgress,
   }) async {
     print(uri + " " + queryParameters.toString());
     String token = await UserPreferences().getToken();
     final prefs = await SharedPreferences.getInstance();
-    String currentLanguage = prefs.getString(langKey);
+    String? currentLanguage = prefs.getString(langKey);
 
+    // ignore: unnecessary_null_comparison
     if (token != null) {
       var customHeaders = {
         'content-type': 'application/json',
@@ -39,20 +40,21 @@ class DioClient {
       };
 
       options = Options();
-      options.headers.addAll(customHeaders);
+      options.headers!.addAll(customHeaders);
     }
 
     if (options == null) {
       options = Options();
     }
 
-    final plainText = Endpoints.clientID;
+    final plainText = Endpoints.clientID!;
     final key = Key.fromUtf8(_hk);
     final iv = IV.fromLength(16);
 
     final _e = Encrypter(AES(key));
     final _edr = _e.decrypt16(plainText, iv: iv);
 
+    // ignore: unnecessary_null_comparison
     if (options != null) {
       var customHeaders = {
         "content-type": "application/json",
@@ -60,7 +62,7 @@ class DioClient {
         "Accept-Language": currentLanguage == Languages.en ? "en" : "id",
         "Client-Id": _edr
       };
-      options.headers.addAll(customHeaders);
+      options.headers!.addAll(customHeaders);
     }
     try {
       (_dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate =
@@ -85,8 +87,8 @@ class DioClient {
       return response.data;
     } catch (e) {
       print(e);
-      OtherUtils.printWrapped(e.response);
-      if (e.response.toString().toLowerCase().contains("expired")) {
+      OtherUtils.printWrapped(e.toString());
+      if (e.toString().toString().toLowerCase().contains("expired")) {
         ScreenUtils.expiredToken();
       }
       throw e;
@@ -95,38 +97,38 @@ class DioClient {
 
   Future<dynamic> getInner(
       String uri, {
-        Map<String, dynamic> queryParameters,
-        Options options,
-        CancelToken cancelToken,
-        ProgressCallback onReceiveProgress,
+        Map<String, dynamic>? queryParameters,
+        Options? options,
+        CancelToken? cancelToken,
+        ProgressCallback? onReceiveProgress,
       }) async {
     print(uri + " " + queryParameters.toString());
     String token = await UserPreferences().getToken();
     final prefs = await SharedPreferences.getInstance();
-    String currentLanguage = prefs.getString(langKey);
+    String? currentLanguage = prefs.getString(langKey);
 
-    if (token != null) {
+    if (token != null) { // ignore: unnecessary_null_comparison
       var customHeaders = {
         'content-type': 'application/json',
         'Authorization': token
       };
 
       options = Options();
-      options.headers.addAll(customHeaders);
+      options.headers!.addAll(customHeaders);
     }
 
     if (options == null) {
       options = Options();
     }
 
-    final plainText = Endpoints.clientID;
+    final plainText = Endpoints.clientID!;
     final key = Key.fromUtf8(_hk);
     final iv = IV.fromLength(16);
 
     final _e = Encrypter(AES(key));
     final _edr = _e.decrypt16(plainText, iv: iv);
 
-    if (options != null) {
+    if (options != null) { // ignore: unnecessary_null_comparison
       var customHeaders = {
         "content-type": "application/json",
         "Access-Control-Allow-Origin": "*",
@@ -134,7 +136,7 @@ class DioClient {
         "Client-Id": _edr,
         "Authorization": Endpoints.innerToken
       };
-      options.headers.addAll(customHeaders);
+      options.headers!.addAll(customHeaders);
     }
     try {
       (_dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate =
@@ -159,8 +161,8 @@ class DioClient {
       return response.data;
     } catch (e) {
       print(e);
-      OtherUtils.printWrapped(e.response);
-      if (e.response.toString().toLowerCase().contains("expired")) {
+      OtherUtils.printWrapped(e.toString());
+      if (e.toString().toString().toLowerCase().contains("expired")) {
         ScreenUtils.expiredToken();
       }
       throw e;
@@ -169,25 +171,25 @@ class DioClient {
 
   // Get:-----------------------------------------------------------------------
   Future<dynamic> delete(String uri,
-      {Map<String, dynamic> queryParameters,
-      Options options,
-      CancelToken cancelToken}) async {
+      {Map<String, dynamic>? queryParameters,
+      Options? options,
+      CancelToken? cancelToken}) async {
     print(uri + " " + queryParameters.toString());
     String token = await UserPreferences().getToken();
     final prefs = await SharedPreferences.getInstance();
-    String currentLanguage = prefs.getString(langKey);
+    String? currentLanguage = prefs.getString(langKey);
 
-    if (token != null) {
+    if (token != null) { // ignore: unnecessary_null_comparison
       var customHeaders = {
         'content-type': 'application/json',
         'Authorization': token
       };
 
       options = Options();
-      options.headers.addAll(customHeaders);
+      options.headers!.addAll(customHeaders);
     }
 
-    final plainText = Endpoints.clientID;
+    final plainText = Endpoints.clientID!;
     final key = Key.fromUtf8(_hk);
     final iv = IV.fromLength(16);
 
@@ -201,7 +203,7 @@ class DioClient {
         "Accept-Language": currentLanguage == Languages.en ? "en" : "id",
         "Client-Id": _edr
       };
-      options.headers.addAll(customHeaders);
+      options.headers!.addAll(customHeaders);
     }
     try {
       (_dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate =
@@ -224,8 +226,8 @@ class DioClient {
       print(response.data);
       return response.data;
     } catch (e) {
-      print(e.response);
-      if (e.response.toString().toLowerCase().contains("expired")) {
+      print(e.toString());
+      if (e.toString().toString().toLowerCase().contains("expired")) {
         ScreenUtils.expiredToken();
       }
       throw e;
@@ -236,37 +238,37 @@ class DioClient {
   Future<dynamic> post(
     String uri, {
     data,
-    Map<String, dynamic> queryParameters,
-    Options options,
-    CancelToken cancelToken,
-    ProgressCallback onSendProgress,
-    ProgressCallback onReceiveProgress,
+    Map<String, dynamic>? queryParameters,
+    Options? options,
+    CancelToken? cancelToken,
+    ProgressCallback? onSendProgress,
+    ProgressCallback? onReceiveProgress,
   }) async {
     String token = await UserPreferences().getToken();
     final prefs = await SharedPreferences.getInstance();
-    String currentLanguage = prefs.getString(langKey);
-    if (token != null) {
+    String? currentLanguage = prefs.getString(langKey);
+    if (token != null) { // ignore: unnecessary_null_comparison
       var customHeaders = {
         'content-type': 'application/json',
         'Authorization': token
       };
 
       options = Options();
-      options.headers.addAll(customHeaders);
+      options.headers!.addAll(customHeaders);
     }
 
     if (options == null) {
       options = Options();
     }
 
-    final plainText = Endpoints.clientID;
+    final plainText = Endpoints.clientID!;
     final key = Key.fromUtf8(_hk);
     final iv = IV.fromLength(16);
 
     final _e = Encrypter(AES(key));
     final _edr = _e.decrypt16(plainText, iv: iv);
 
-    if (options != null) {
+    if (options != null) { // ignore: unnecessary_null_comparison
       var customHeaders = {
         "content-type": "application/json",
         "Access-Control-Allow-Origin": "*",
@@ -274,7 +276,7 @@ class DioClient {
         "Accept-Language": currentLanguage == Languages.en ? "en" : "id",
         "Client-Id": _edr
       };
-      options.headers.addAll(customHeaders);
+      options.headers!.addAll(customHeaders);
     }
 
     print(uri);
@@ -303,8 +305,8 @@ class DioClient {
       print(response);
       return response.data;
     } catch (e) {
-      print(e.response);
-      if (e.response.toString().toLowerCase().contains("expired")) {
+      print(e.toString());
+      if (e.toString().toString().toLowerCase().contains("expired")) {
         ScreenUtils.expiredToken();
       }
       throw e;
@@ -314,26 +316,26 @@ class DioClient {
   Future<dynamic> put(
     String uri, {
     data,
-    Map<String, dynamic> queryParameters,
-    Options options,
-    CancelToken cancelToken,
-    ProgressCallback onSendProgress,
-    ProgressCallback onReceiveProgress,
+    Map<String, dynamic>? queryParameters,
+    Options? options,
+    CancelToken? cancelToken,
+    ProgressCallback? onSendProgress,
+    ProgressCallback? onReceiveProgress,
   }) async {
     String token = await UserPreferences().getToken();
     final prefs = await SharedPreferences.getInstance();
-    String currentLanguage = prefs.getString(langKey);
-    if (token != null) {
+    String? currentLanguage = prefs.getString(langKey);
+    if (token != null) { // ignore: unnecessary_null_comparison
       var customHeaders = {
         'content-type': 'application/json',
         'Authorization': token
       };
 
       options = Options();
-      options.headers.addAll(customHeaders);
+      options.headers!.addAll(customHeaders);
     }
 
-    final plainText = Endpoints.clientID;
+    final plainText = Endpoints.clientID!;
     final key = Key.fromUtf8(_hk);
     final iv = IV.fromLength(16);
 
@@ -348,7 +350,7 @@ class DioClient {
         "Accept-Language": currentLanguage == Languages.en ? "en" : "id",
         "Client-Id": _edr
       };
-      options.headers.addAll(customHeaders);
+      options.headers!.addAll(customHeaders);
     }
 
     print(uri);
@@ -378,8 +380,8 @@ class DioClient {
       print(response.statusCode);
       return response.data;
     } catch (e) {
-      print(e.response);
-      if (e.response.toString().toLowerCase().contains("expired")) {
+      print(e.toString());
+      if (e.toString().toString().toLowerCase().contains("expired")) {
         ScreenUtils.expiredToken();
       }
       throw e;

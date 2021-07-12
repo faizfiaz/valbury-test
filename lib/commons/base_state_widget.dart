@@ -20,7 +20,9 @@ class BaseStateWidget<S extends StatefulWidget> extends ResumableState<S>
   }
 
   @override
-  Widget build(BuildContext context) {}
+  Widget build(BuildContext context) {
+    return Container();
+  }
 
   void setLoading(bool condition) {
     isLoading = condition;
@@ -32,11 +34,11 @@ class BaseStateWidget<S extends StatefulWidget> extends ResumableState<S>
   }
 
   @override
-  void showError(List<Errors> error, int httpCode) {
+  void showError(List<Errors>? error, int? httpCode) {
     checkExpired(error, httpCode);
   }
 
-  void checkExpired(List<Errors> error, int httpCode) {
+  void checkExpired(List<Errors>? error, int? httpCode) {
     if (httpCode == 400) {
       showExpired();
     } else {

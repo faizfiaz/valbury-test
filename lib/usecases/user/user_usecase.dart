@@ -10,20 +10,18 @@ class UserUsecase extends IUserUsecase {
 
   UserUsecase(UserRepository repository) : super(repository);
 
-  UserUsecase.empty() : super(null);
-
   @override
-  Future<Map<ResponseLogin, ErrorMessage>> login(
+  Future<Map<ResponseLogin?, ErrorMessage?>> login(
       String email, String password) async {
     disposeVariable();
-    ResponseLogin responseLogin;
+    ResponseLogin? responseLogin;
     String firebaseToken = await userSp.getFirebaseToken();
     await repository
         .authenticate(
             email: email, password: password, firebaseToken: firebaseToken)
         .then((val) {
       responseLogin = val;
-      userSp.setToken(responseLogin.data.token);
+      userSp.setToken(responseLogin!.data!.token!);
     }).catchError((e) async {
       mappingError(error, e).then((value) => error = value);
     });
@@ -32,7 +30,7 @@ class UserUsecase extends IUserUsecase {
 
   Future<String> getFirebaseToken() async {
     String token = await userSp.getFirebaseToken();
-    if (token != null) {
+    if (token != null) { // ignore: unnecessary_null_comparison
       return token;
     }
     return "";
@@ -40,7 +38,7 @@ class UserUsecase extends IUserUsecase {
 
   hasToken() async {
     String token = await userSp.getToken();
-    if (token != null) {
+    if (token != null) { // ignore: unnecessary_null_comparison
       return true;
     }
     return false;

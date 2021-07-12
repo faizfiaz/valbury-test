@@ -18,49 +18,48 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.7.0 <3.0.0"
+  sdk: '>=2.12.0 <3.0.0'
 
 dependencies:
   flutter:
     sdk: flutter
 
-  cupertino_icons: ^1.0.2
+  cupertino_icons: ^1.0.3
 
   #Base App Needed
   #Technical
   dio: ^4.0.0 #Connection Manager
-  http: ^0.13.1 #Base Connection
-  flutter_dotenv: ^4.0.0-nullsafety.0 #For env properties
-  pull_to_refresh: ^1.6.5 #Add functionality pull refresh for list
-  flutter_secure_storage: ^4.1.0 #For saving session user safely, better than shared preference
-  shared_preferences: ^2.0.5 #For saving non secure data
-  need_resume: ^1.0.5+1 #Add lifecycle in Flutter App
+  http: ^0.13.3 #Base Connection
+  flutter_dotenv: ^5.0.0 #For env properties
+  pull_to_refresh: ^2.0.0 #Add functionality pull refresh for list
+  flutter_secure_storage: ^4.2.0 #For saving session user safely, better than shared preference
+  shared_preferences: ^2.0.6 #For saving non secure data
+  need_resume: ^1.0.6 #Add lifecycle in Flutter App
   flutter_inappwebview: ^5.3.2 #Webview Android & IOS
   loadmore: ^2.0.1 #Add functionality load more for list
-  url_launcher: ^6.0.3 #For launching a URL
-  flutter_local_notifications: ^5.0.0+1 #Handle Notification
+  url_launcher: ^6.0.9 #For launching a URL
+  flutter_local_notifications: ^5.0.0+4 #Handle Notification
   encrypt: ^5.0.0 #For Encryption
   provider: ^5.0.0 #State Management
 
   #UI
-  flutter_svg: ^0.21.0+1 #For render SVG Assets
-  flutter_icons: ^1.1.0 #Rich icon see documentation for availability Icons https://pub.dev/packages/flutter_icons
+  flutter_svg: ^0.22.0 #For render SVG Assets
   introduction_screen: ^2.1.0 #Standar Intro app
-  flutter_form_builder: ^6.0.0-nullsafety.1 #Form Builder
+  flutter_form_builder: ^6.0.1 #Form Builder
   rflutter_alert: ^2.0.2 #Alert Dialog
   dots_indicator: ^2.0.0 #Dots Indicator for page view
-  fluttertoast: ^8.0.3 #Toast
-  carousel_slider: ^4.0.0-nullsafety.0 #Image Carousel
+  fluttertoast: ^8.0.7 #Toast
+  carousel_slider: ^4.0.0 #Image Carousel
   photo_view: ^0.11.1 #Enlarge Image with zoom function
 
   #Firebase Dependency
-  firebase_crashlytics: ^2.0.0 #Crash Reporting
-  firebase_core: ^1.0.3 #Firebase Core Dep
-  firebase_messaging: ^9.1.1 #Firebase Cloud Messaging Functionality
+  firebase_crashlytics: ^2.0.7 #Crash Reporting
+  firebase_core: ^1.3.0 #Firebase Core Dep
+  firebase_messaging: ^10.0.3 #Firebase Cloud Messaging Functionality
 
   #Social Login
-  google_sign_in: ^5.0.1 #Add Google Login
-  flutter_facebook_login: ^3.0.0 #Add Facebook Login
+  google_sign_in: ^5.0.4 #Add Google Login
+  flutter_facebook_auth: ^3.5.0
   sign_in_with_apple: ^3.0.0 #Add Apple Login
 
 
@@ -87,23 +86,26 @@ flutter:
     - .env
 
   fonts:
-    - family: Poppins
+    - family: NunitoSans
       fonts:
-        - asset: assets/fonts/Poppins-Regular.ttf
-        - asset: assets/fonts/Poppins-Light.ttf
+        - asset: assets/fonts/NunitoSans-Regular.ttf
+        - asset: assets/fonts/NunitoSans-Light.ttf
+          weight: 300
+        - asset: assets/fonts/NunitoSans-Regular.ttf
           weight: 400
-        - asset: assets/fonts/Poppins-Medium.ttf
+        - asset: assets/fonts/NunitoSans-SemiBold.ttf
           weight: 600
-        - asset: assets/fonts/Poppins-SemiBold.ttf
+        - asset: assets/fonts/NunitoSans-Bold.ttf
           weight: 700
-        - asset: assets/fonts/Poppins-Bold.ttf
+        - asset: assets/fonts/NunitoSans-ExtraBold.ttf
           weight: 800
-        - asset: assets/fonts/Poppins-ExtraBold.ttf
-          weight: 900
-        - asset: assets/fonts/Poppins-Italic.ttf
+        - asset: assets/fonts/NunitoSans-Italic.ttf
           style: italic
-        - asset: assets/fonts/Poppins-SemiBoldItalic.ttf
+        - asset: assets/fonts/NunitoSans-SemiBoldItalic.ttf
           weight: 600
+          style: italic
+        - asset: assets/fonts/NunitoSans-BoldItalic.ttf
+          weight: 700
           style: italic
 
   # For details regarding fonts from package dependencies,

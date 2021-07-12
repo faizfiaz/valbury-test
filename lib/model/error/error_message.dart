@@ -1,15 +1,15 @@
 class ErrorMessage {
-  int httpCode;
-  List<Errors> errors;
-  Meta meta;
+  int? httpCode;
+  List<Errors>? errors;
+  Meta? meta;
 
   ErrorMessage({this.errors, this.meta, this.httpCode});
 
   ErrorMessage.fromJson(Map<String, dynamic> json) {
     if (json['errors'] != null) {
-      errors = new List<Errors>();
+      errors = new List.empty(growable: true);
       json['errors'].forEach((v) {
-        errors.add(new Errors.fromJson(v));
+        errors!.add(new Errors.fromJson(v));
       });
     }
     meta = json['meta'] != null ? new Meta.fromJson(json['meta']) : null;
@@ -18,10 +18,10 @@ class ErrorMessage {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     if (this.errors != null) {
-      data['errors'] = this.errors.map((v) => v.toJson()).toList();
+      data['errors'] = this.errors!.map((v) => v.toJson()).toList();
     }
     if (this.meta != null) {
-      data['meta'] = this.meta.toJson();
+      data['meta'] = this.meta!.toJson();
     }
     data['httpCode'] = this.httpCode;
     return data;
@@ -29,7 +29,7 @@ class ErrorMessage {
 }
 
 class Errors {
-  String error;
+  String? error;
 
   Errors({this.error});
 
@@ -45,7 +45,7 @@ class Errors {
 }
 
 class Meta {
-  String message;
+  String? message;
 
   Meta({this.message});
 

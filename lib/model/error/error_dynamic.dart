@@ -2,8 +2,8 @@ import 'dart:collection';
 
 class ErrorHandlerDynamic{
   Map<String, List<dynamic>> errors = HashMap();
-  int httpCode;
-  String message;
+  int? httpCode;
+  String? message;
 
   ErrorHandlerDynamic(this.httpCode, this.message);
 

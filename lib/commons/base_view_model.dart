@@ -7,21 +7,17 @@ import 'base_navigator.dart';
 import 'multilanguage.dart';
 
 abstract class BaseViewModel<NV extends BaseNavigator> extends ChangeNotifier {
-  NV view;
-  DioClient dioClient;
+  NV? view;
+  DioClient dioClient = DioClient(Dio());
 
   bool isLoading = false;
-
-  BaseViewModel() {
-    dioClient = DioClient(Dio());
-  }
 
   BaseViewModel setView(NV view) {
     this.view = view;
     return this;
   }
 
-  NV getView() {
+  NV? getView() {
     return view;
   }
 
@@ -39,7 +35,7 @@ abstract class BaseViewModel<NV extends BaseNavigator> extends ChangeNotifier {
   void changeLanguage(BuildContext context) async {
     String languages = Languages.en;
     final prefs = await SharedPreferences.getInstance();
-    String currentLanguage = prefs.getString(langKey);
+    String? currentLanguage = prefs.getString(langKey);
     if (currentLanguage != null) {
       if (currentLanguage == Languages.en) {
         languages = Languages.id;
@@ -50,7 +46,7 @@ abstract class BaseViewModel<NV extends BaseNavigator> extends ChangeNotifier {
     MultiLanguage()
         .setLanguage(path: languages, context: context)
         .then((value) {
-      getView().refreshState();
+      getView()!.refreshState();
       notifyListeners();
     });
   }

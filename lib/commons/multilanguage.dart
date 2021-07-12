@@ -13,7 +13,7 @@ String langKey = 'lang';
 
 class MultiLanguage {
   static final MultiLanguage _singleton = MultiLanguage._internal();
-  Map<String, dynamic> phrases;
+  Map<String, dynamic>? phrases;
 
   factory MultiLanguage() {
     return _singleton;
@@ -22,7 +22,7 @@ class MultiLanguage {
   MultiLanguage._internal();
 
   Future<bool> setLanguage(
-      {@required String path, @required BuildContext context}) async {
+      {required String path, required BuildContext context}) async {
     final prefs = await SharedPreferences.getInstance();
     var file = await DefaultAssetBundle.of(context).loadString(path);
     prefs.setString(langKey, path);
@@ -30,12 +30,12 @@ class MultiLanguage {
     return Future.value(true);
   }
 
-  String get(String key) {
-    return phrases != null ? phrases[key] : key;
+  String? get(String key) {
+    return phrases != null ? phrases![key] : key;
   }
 }
 
 Function(String key) get txt => MultiLanguage().get;
 
 Function(String key) get uptxt =>
-    (String key) => MultiLanguage().get(key).toUpperCase();
+    (String key) => MultiLanguage().get(key)!.toUpperCase();

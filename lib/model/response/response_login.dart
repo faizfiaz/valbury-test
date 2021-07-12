@@ -1,5 +1,5 @@
 class ResponseLogin {
-  LoginData data;
+  LoginData? data;
   Null meta;
 
   ResponseLogin({this.data, this.meta});
@@ -12,7 +12,7 @@ class ResponseLogin {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     if (this.data != null) {
-      data['data'] = this.data.toJson();
+      data['data'] = this.data!.toJson();
     }
     data['meta'] = this.meta;
     return data;
@@ -20,7 +20,7 @@ class ResponseLogin {
 }
 
 class LoginData {
-  String token;
+  String? token;
 
   LoginData({this.token});
 

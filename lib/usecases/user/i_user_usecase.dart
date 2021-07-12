@@ -7,5 +7,5 @@ import '../base_usecase.dart';
 abstract class IUserUsecase extends BaseUsecase<UserRepository> {
   IUserUsecase(UserRepository repository) : super(repository);
 
-  Future<Map<ResponseLogin, ErrorMessage>> login(String email, String password);
+  Future<Map<ResponseLogin?, ErrorMessage?>> login(String email, String password);
 }

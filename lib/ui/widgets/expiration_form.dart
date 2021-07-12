@@ -3,15 +3,15 @@ import 'package:flutter/material.dart';
 class ExpirationFormField extends StatefulWidget {
   ExpirationFormField({
     this.key,
-    @required this.controller,
+    required this.controller,
     this.decoration,
     this.obscureText = false,
     this.enabled = true,
   }) : super(key: key);
 
-  final Key key;
+  final Key? key;
   final TextEditingController controller;
-  final InputDecoration decoration;
+  final InputDecoration? decoration;
   final bool obscureText;
   final bool enabled;
 

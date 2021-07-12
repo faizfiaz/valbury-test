@@ -1,15 +1,10 @@
-import 'dart:convert';
-
+import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:terkelola/commons/base_view_model.dart';
 import 'package:terkelola/commons/email_validator.dart';
-import 'package:terkelola/data/remote/endpoints/endpoints.dart';
 import 'package:terkelola/model/entity/facebook_data.dart';
 import 'package:terkelola/repository/user_repository.dart';
 import 'package:terkelola/usecases/user/user_usecase.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_facebook_login/flutter_facebook_login.dart';
-import 'package:google_sign_in/google_sign_in.dart';
-import 'package:http/http.dart' as http;
 
 import 'login_navigator.dart';
 
@@ -20,21 +15,21 @@ class LoginViewModel extends BaseViewModel<LoginNavigator> {
   bool errorEmail = false;
   bool errorPassword = false;
 
-  UserUsecase _usecase;
+  late UserUsecase _usecase;
 
   GoogleSignIn _googleSignIn = GoogleSignIn();
-  GoogleSignInAccount _currentUser;
-  FacebookData data;
+  GoogleSignInAccount? _currentUser;
+  FacebookData? data;
 
   LoginViewModel() {
     _usecase = new UserUsecase(UserRepository(dioClient));
     controllerEmail.addListener(checkValidEmail);
     controllerPassword.addListener(checkLengthPassword);
 
-    _googleSignIn.onCurrentUserChanged.listen((GoogleSignInAccount account) {
+    _googleSignIn.onCurrentUserChanged.listen((GoogleSignInAccount? account) {
       _currentUser = account;
       if (_currentUser != null) {
-        _currentUser.authentication.then((value) {
+        _currentUser!.authentication.then((value) {
           //Success Login Google
           // doLoginThirdParty(
           //     _currentUser.email, value.idToken, Endpoints.googleKey);
@@ -61,11 +56,12 @@ class LoginViewModel extends BaseViewModel<LoginNavigator> {
         .then((value) {
       showLoading(false);
       if (value.values.first != null) {
-        getView()
-            .showError(value.values.first.errors, value.values.first.httpCode);
+        getView()!
+            .showError(value.values.first!.errors, value.values.first!.httpCode);
       } else {
-        getView().showMainPage();
+        getView()!.showMainPage();
       }
+    // ignore: return_of_invalid_type_from_catch_error
     }).catchError((errorValue) => print(errorValue));
   }
 
@@ -79,33 +75,33 @@ class LoginViewModel extends BaseViewModel<LoginNavigator> {
   }
 
   handleSignInFacebook() async {
-    final facebookLogin = FacebookLogin();
-    facebookLogin.logOut();
-    final result = await facebookLogin.logIn(['email']);
-    switch (result.status) {
-      case FacebookLoginStatus.loggedIn:
-        fetchUserData(result.accessToken);
-        break;
-      case FacebookLoginStatus.cancelledByUser:
-        print("canceled");
-        break;
-      case FacebookLoginStatus.error:
-        print("error");
-        break;
-    }
+    // final facebookLogin = FacebookLogin();
+    // facebookLogin.logOut();
+    // final result = await facebookLogin.logIn(['email']);
+    // switch (result.status) {
+    //   case FacebookLoginStatus.loggedIn:
+    //     fetchUserData(result.accessToken);
+    //     break;
+    //   case FacebookLoginStatus.cancelledByUser:
+    //     print("canceled");
+    //     break;
+    //   case FacebookLoginStatus.error:
+    //     print("error");
+    //     break;
+    // }
   }
 
-  Future<void> fetchUserData(FacebookAccessToken accessToken) async {
-    showLoading(true);
-    final token = accessToken.token;
-    final graphResponse = await http.get(Uri.https(
-        Endpoints.facebookAuthority, Endpoints.facebookGraph + token));
-    final profile = jsonDecode(graphResponse.body);
-    data = FacebookData.fromJson(profile);
-    if (data != null) {
-      //Success Login Facebook
-      // doLoginThirdParty(data.email, token, Endpoints.facebookKey);
-    }
-    showLoading(false);
-  }
+// Future<void> fetchUserData(FacebookAccessToken accessToken) async {
+//   showLoading(true);
+//   final token = accessToken.token;
+//   final graphResponse = await http.get(Uri.https(
+//       Endpoints.facebookAuthority, Endpoints.facebookGraph + token));
+//   final profile = jsonDecode(graphResponse.body);
+//   data = FacebookData.fromJson(profile);
+//   if (data != null) {
+//     //Success Login Facebook
+//     // doLoginThirdParty(data.email, token, Endpoints.facebookKey);
+//   }
+//   showLoading(false);
+// }
 }

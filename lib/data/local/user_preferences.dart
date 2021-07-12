@@ -25,7 +25,7 @@ class UserPreferences {
 
   Future<String> getToken() async {
     final secureStorage = FlutterSecureStorage();
-    String data = await secureStorage.read(key: token_key);
+    String? data = await secureStorage.read(key: token_key);
     if (data != null) {
       final key = Key.fromUtf8(_hk);
       final iv = IV.fromLength(16);
@@ -40,12 +40,12 @@ class UserPreferences {
 
   Future<void> setAlreadySeenIntro() async {
     final SharedPreferences preferences = await SharedPreferences.getInstance();
-    return preferences.setBool(intro_key, true);
+    preferences.setBool(intro_key, true);
   }
 
   Future<bool> hasSeenIntro() async {
     final SharedPreferences preferences = await SharedPreferences.getInstance();
-    bool data = preferences.getBool(intro_key);
+    bool? data = preferences.getBool(intro_key);
     if (data == null) {
       return Future.value(false);
     }
@@ -60,7 +60,7 @@ class UserPreferences {
 
   Future<String> getFirebaseToken() async {
     final secureStorage = FlutterSecureStorage();
-    String data = await secureStorage.read(key: firebase_token_key);
+    String? data = await secureStorage.read(key: firebase_token_key);
     if (data != null) {
       return Future.value(data);
     } else {

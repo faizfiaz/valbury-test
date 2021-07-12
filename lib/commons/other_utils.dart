@@ -42,8 +42,8 @@ class OtherUtils {
     pattern.allMatches(text).forEach((match) => print(match.group(0)));
   }
 
-  static String buildLoadMoreText(LoadMoreStatus status) {
-    String text = "";
+  static String? buildLoadMoreText(LoadMoreStatus status) {
+    String? text = "";
     switch (status) {
       case LoadMoreStatus.fail:
         text = txt("load_more_failed");

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class KeyboardAvoiding extends StatelessWidget {
-  final Widget child;
+  final Widget? child;
   final Curve curve;
   final Duration duration;
   final double kFactor;

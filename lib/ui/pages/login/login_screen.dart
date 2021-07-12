@@ -11,14 +11,13 @@ import 'package:terkelola/ui/widgets/default_button.dart';
 import 'package:terkelola/ui/widgets/loading_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_icons/flutter_icons.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 
 import 'login_navigator.dart';
 import 'login_view_model.dart';
 
-class LoginScreen extends StatefulWidget {
+class LoginScreen extends StatefulWidget { // ignore: must_be_immutable
   bool backToPreviousPage;
 
   LoginScreen({this.backToPreviousPage = false});
@@ -31,14 +30,14 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreen extends BaseStateWidget<LoginScreen>
     implements LoginNavigator {
-  LoginViewModel _viewModel;
+  LoginViewModel? _viewModel;
 
   bool passwordVisible = false;
 
   @override
   void initState() {
     super.initState();
-    _viewModel = LoginViewModel().setView(this);
+    _viewModel = LoginViewModel().setView(this) as LoginViewModel?;
   }
 
   @override
@@ -52,11 +51,11 @@ class _LoginScreen extends BaseStateWidget<LoginScreen>
     super.build(context);
     SystemChrome.setEnabledSystemUIOverlays(SystemUiOverlay.values);
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.light);
-    return ChangeNotifierProvider<LoginViewModel>(
+    return ChangeNotifierProvider<LoginViewModel?>(
         create: (context) => _viewModel,
         child: Consumer<LoginViewModel>(
             builder: (context, viewModel, _) => Scaffold(
-                  appBar: AppBarCustom.trans(),
+                  appBar: AppBarCustom.trans() as PreferredSizeWidget?,
                   backgroundColor: white,
                   body: Container(
                     child: Stack(
@@ -93,7 +92,7 @@ class _LoginScreen extends BaseStateWidget<LoginScreen>
   }
 
   @override
-  void showError(List<Errors> error, int httpCode) {
+  void showError(List<Errors>? error, int? httpCode) {
     ScreenUtils.showAlertMessage(context, error, httpCode);
   }
 
@@ -144,7 +143,7 @@ class _LoginScreen extends BaseStateWidget<LoginScreen>
                           border: Border(
                             right: BorderSide(
                               //                   <--- left side
-                              color: strokeGrey,
+                              color: primaryText,
                               width: 0.5,
                             ),
                           ),
@@ -157,21 +156,21 @@ class _LoginScreen extends BaseStateWidget<LoginScreen>
                       ),
                       enabledBorder: new OutlineInputBorder(
                           borderSide:
-                              new BorderSide(color: strokeGrey, width: 0.5)),
+                              new BorderSide(color: primaryText, width: 0.5)),
                       border: OutlineInputBorder(
                           borderSide:
-                              BorderSide(color: strokeGrey, width: 0.5)),
+                              BorderSide(color: primaryText, width: 0.5)),
                       hintText: "Email",
-                      errorText: _viewModel.errorEmail
+                      errorText: _viewModel!.errorEmail
                           ? txt("email_not_valid")
                           : null),
-                  controller: _viewModel.controllerEmail,
+                  controller: _viewModel!.controllerEmail,
                 ),
                 SizedBox(
                   height: 16,
                 ),
                 TextField(
-                  controller: _viewModel.controllerPassword,
+                  controller: _viewModel!.controllerPassword,
                   obscureText: !passwordVisible,
                   style: TextStyle(fontSize: 12),
                   decoration: InputDecoration(
@@ -185,25 +184,25 @@ class _LoginScreen extends BaseStateWidget<LoginScreen>
                           border: Border(
                             right: BorderSide(
                               //                   <--- left side
-                              color: strokeGrey,
+                              color: primaryText,
                               width: 0.5,
                             ),
                           ),
                         ),
                         child: Icon(
-                          Ionicons.ios_unlock,
+                          Icons.account_balance,
                           color: primary,
                           size: 18,
                         ),
                       ),
                       enabledBorder: OutlineInputBorder(
                           borderSide:
-                              BorderSide(color: strokeGrey, width: 0.5)),
+                              BorderSide(color: primaryText, width: 0.5)),
                       border: OutlineInputBorder(
                           borderSide:
-                              BorderSide(color: strokeGrey, width: 0.5)),
+                              BorderSide(color: primaryText, width: 0.5)),
                       hintText: "Passsword",
-                      errorText: _viewModel.errorPassword
+                      errorText: _viewModel!.errorPassword
                           ? txt("password_minimum_6")
                           : null,
                       suffixIcon: IconButton(
@@ -221,7 +220,7 @@ class _LoginScreen extends BaseStateWidget<LoginScreen>
                   height: 16,
                 ),
                 DefaultButton.redButton(
-                    context, txt("login"), () => _viewModel.doLogin()),
+                    context, txt("login"), () => _viewModel!.doLogin()),
                 Container(
                   alignment: Alignment.center,
                   width: double.infinity,
@@ -258,7 +257,7 @@ class _LoginScreen extends BaseStateWidget<LoginScreen>
               Material(
                 color: Colors.transparent,
                 child: InkWell(
-                  onTap: () => _viewModel.handleSignInGoogle(),
+                  onTap: () => _viewModel!.handleSignInGoogle(),
                   child: SvgPicture.asset(
                     icGoogle,
                     width: 40,
@@ -272,7 +271,7 @@ class _LoginScreen extends BaseStateWidget<LoginScreen>
               Material(
                 color: Colors.transparent,
                 child: InkWell(
-                  onTap: () => _viewModel.handleSignInFacebook(),
+                  onTap: () => _viewModel!.handleSignInFacebook(),
                   child: SvgPicture.asset(
                     icFacebook,
                     width: 40,
@@ -310,7 +309,7 @@ class _LoginScreen extends BaseStateWidget<LoginScreen>
           Material(
             color: white,
             child: InkWell(
-              onTap: () => _viewModel.changeLanguage(context),
+              onTap: () => _viewModel!.changeLanguage(context),
               child: Text(
                 txt("current_language"),
                 style: TextStyle(
@@ -324,7 +323,7 @@ class _LoginScreen extends BaseStateWidget<LoginScreen>
   }
 
   @override
-  void showRegisterThirdParty(
+  void showRegisterThirdParty( // ignore: override_on_non_overriding_member
       String email, String displayName, String photoUrl, String registerVia) {
     // push(
     //     context,

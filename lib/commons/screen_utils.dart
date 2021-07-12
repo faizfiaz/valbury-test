@@ -41,7 +41,7 @@ class ScreenUtils {
   }
 
   static void showAlertMessage(
-      BuildContext context, List<Errors> message, int httpCode) {
+      BuildContext context, List<Errors>? message, int? httpCode) {
     var messageText = "";
     if (message != null && message.isNotEmpty) {
       message.forEach((element) {
@@ -125,99 +125,6 @@ class ScreenUtils {
     // ).show();
   }
 
-  static void showOptionImagePicker(BuildContext context, openImagePicker) {
-    showModalBottomSheet(
-        context: context,
-        builder: (context) {
-          return StatefulBuilder(
-              builder: (BuildContext context, StateSetter modalState) {
-            return Container(
-              color: greysBackground,
-              height: ScreenUtils.getScreenHeight(context) / 4,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Padding(
-                    padding: const EdgeInsets.all(16),
-                    child: Text(
-                      txt("choose_image"),
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-                    ),
-                  ),
-                  Divider(
-                    color: greys,
-                    height: 0.5,
-                  ),
-                  Material(
-                    color: white,
-                    child: InkWell(
-                      onTap: () => openImagePicker(true),
-                      child: Container(
-                        padding: EdgeInsets.all(16),
-                        width: double.infinity,
-                        alignment: Alignment.centerLeft,
-                        child: Row(
-                          children: <Widget>[
-                            Icon(Icons.camera_alt),
-                            SizedBox(
-                              width: 12,
-                            ),
-                            Expanded(
-                              child: Text(
-                                txt("camera"),
-                                style: TextStyle(
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.w400),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                  Divider(
-                    color: greys,
-                    height: 0.5,
-                  ),
-                  Material(
-                    color: white,
-                    child: InkWell(
-                      onTap: () => openImagePicker(false),
-                      child: Container(
-                        padding: EdgeInsets.all(16),
-                        width: double.infinity,
-                        alignment: Alignment.centerLeft,
-                        child: Row(
-                          children: <Widget>[
-                            Icon(Icons.image),
-                            SizedBox(
-                              width: 12,
-                            ),
-                            Expanded(
-                              child: Text(
-                                txt("gallery"),
-                                style: TextStyle(
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.w400),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                  Divider(
-                    color: greys,
-                    height: 0.5,
-                  ),
-                ],
-              ),
-            );
-          });
-        });
-  }
-
   static void showToastMessage(String message) {
     Fluttertoast.showToast(
         msg: message,
@@ -234,7 +141,7 @@ class ScreenUtils {
       showToastMessage(txt("expired_token"));
       // UserUsecase.empty().logout().then((value) {
       NavKey.isInLogin = true;
-      NavKey.navKey.currentState.pushNamed('/login');
+      NavKey.navKey.currentState!.pushNamed('/login');
       // });
     }
   }

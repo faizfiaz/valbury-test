@@ -1,6 +1,5 @@
 import 'package:terkelola/constants/colors.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_icons/flutter_icons.dart';
 
 class AppBarCustom {
   static Widget buildAppBar(BuildContext context, title) {
@@ -20,7 +19,7 @@ class AppBarCustom {
       ),
       leading: IconButton(
         iconSize: 28,
-        icon: Icon(Feather.chevron_left, color: Colors.white),
+        icon: Icon(Icons.arrow_back_ios, color: Colors.white),
         onPressed: () => Navigator.of(context).pop(),
       ),
     );
@@ -44,7 +43,7 @@ class AppBarCustom {
       ),
       leading: IconButton(
         iconSize: 28,
-        icon: Icon(Feather.chevron_left, color: primary),
+        icon: Icon(Icons.arrow_back_ios, color: primary),
         onPressed: () => Navigator.of(context).pop(),
       ),
     );
@@ -58,7 +57,7 @@ class AppBarCustom {
       elevation: 0,
       leading: IconButton(
         iconSize: 28,
-        icon: Icon(Feather.chevron_left, color: primary),
+        icon: Icon(Icons.arrow_back_ios, color: primary),
         onPressed: () => Navigator.of(context).pop(),
       ),
     );

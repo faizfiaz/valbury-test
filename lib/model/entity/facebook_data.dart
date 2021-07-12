@@ -1,10 +1,10 @@
 class FacebookData {
-  String name;
-  Picture picture;
-  String firstName;
-  String lastName;
-  String email;
-  String id;
+  String? name;
+  Picture? picture;
+  String? firstName;
+  String? lastName;
+  String? email;
+  String? id;
 
   FacebookData(
       {this.name,
@@ -28,7 +28,7 @@ class FacebookData {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['name'] = this.name;
     if (this.picture != null) {
-      data['picture'] = this.picture.toJson();
+      data['picture'] = this.picture!.toJson();
     }
     data['first_name'] = this.firstName;
     data['last_name'] = this.lastName;
@@ -39,7 +39,7 @@ class FacebookData {
 }
 
 class Picture {
-  Image data;
+  Image? data;
 
   Picture({this.data});
 
@@ -50,17 +50,17 @@ class Picture {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     if (this.data != null) {
-      data['data'] = this.data.toJson();
+      data['data'] = this.data!.toJson();
     }
     return data;
   }
 }
 
 class Image {
-  int height;
-  bool isSilhouette;
-  String url;
-  int width;
+  int? height;
+  bool? isSilhouette;
+  String? url;
+  int? width;
 
   Image({this.height, this.isSilhouette, this.url, this.width});
 

@@ -8,12 +8,12 @@ import 'package:terkelola/repository/base_repository.dart';
 abstract class BaseUsecase<R extends BaseRepository> {
   R repository;
 
-  ErrorMessage error;
-  ErrorHandlerDynamic errorHandlerDynamic;
+  ErrorMessage? error;
+  ErrorHandlerDynamic? errorHandlerDynamic;
 
   BaseUsecase(this.repository);
 
-  Future<ErrorMessage> mappingError(ErrorMessage error, dynamic e) async {
+  Future<ErrorMessage> mappingError(ErrorMessage? error, dynamic e) async {
     print(e);
     print(e.response.toString());
     try {

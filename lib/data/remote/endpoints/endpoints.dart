@@ -1,15 +1,16 @@
-import 'package:flutter_dotenv/flutter_dotenv.dart' as environment;
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class Endpoints {
+  // ignore: unused_element
   Endpoints._();
 
   Endpoints();
 
-  String baseUrl = environment.env['CURRENT_ENV'] == "0"
-      ? environment.env['BASE_URL_DEV']
-      : environment.env['BASE_URL'];
-  static String clientID = environment.env['CLIENT_ID'];
-  static String innerToken = environment.env['INNER_TOKEN'];
+  String? baseUrl = dotenv.env['CURRENT_ENV'] == "0"
+      ? dotenv.env['BASE_URL_DEV']
+      : dotenv.env['BASE_URL'];
+  static String? clientID = dotenv.env['CLIENT_ID'];
+  static String? innerToken = dotenv.env['INNER_TOKEN'];
 
   static const int receiveTimeout = 30000;
   static const int connectionTimeout = 30000;

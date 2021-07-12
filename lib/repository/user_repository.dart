@@ -1,7 +1,6 @@
 import 'package:terkelola/data/remote/client/dio_client.dart';
 import 'package:terkelola/data/remote/endpoints/user_endpoints.dart';
 import 'package:terkelola/model/response/response_login.dart';
-import 'package:flutter/material.dart';
 
 import 'base_repository.dart';
 
@@ -11,9 +10,9 @@ class UserRepository extends BaseRepository {
   dynamic data;
 
   Future<ResponseLogin> authenticate(
-      {@required String email,
-      @required String password,
-      @required String firebaseToken}) async {
+      {required String email,
+      required String password,
+      required String firebaseToken}) async {
     await dioClient.post(UserEndpoint.urlLogin, data: {
       "identity": email,
       "password": password,

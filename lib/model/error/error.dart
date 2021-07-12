@@ -1,7 +1,7 @@
 class ErrorHandler {
-  int httpCode;
-  String error;
-  String message;
+  int? httpCode;
+  String? error;
+  String? message;
 
   ErrorHandler(this.httpCode, this.error, this.message);
 

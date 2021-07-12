@@ -7,7 +7,7 @@ class StrokePrice extends CustomPainter {
     final p1 = Offset(0, 20);
     final p2 = Offset(80, 0);
     final paint = Paint()
-      ..color = greysLight
+      ..color = primaryText
       ..strokeWidth = 1;
     canvas.drawLine(p1, p2, paint);
   }

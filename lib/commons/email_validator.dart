@@ -287,7 +287,7 @@ class EmailValidator {
       [bool allowTopLevelDomains = false, bool allowInternational = true]) {
     _index = 0;
 
-    if (email == null) {
+    if (email == null) { // ignore: unnecessary_null_comparison
       throw ArgumentError('email');
     }
 
