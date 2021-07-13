@@ -8,6 +8,8 @@ const String imageIntro3 = pathImage + "intro_3.svg";
 
 /*ICONS*/
 const String icLogo = pathIcons + "ic_logo.svg";
+const String icLogoBlack = pathIcons + "ic_logo_black.svg";
+const String icLogoRed = pathIcons + "ic_logo_red.svg";
 const String icFacebook = pathIcons + "ic_facebook.svg";
 const String icGoogle = pathIcons + "ic_google_plus.svg";
 

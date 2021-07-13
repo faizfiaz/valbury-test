@@ -5,6 +5,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:terkelola/commons/multilanguage.dart';
+import 'package:terkelola/commons/screen_utils.dart';
 import 'package:terkelola/constants/colors.dart';
 import 'package:terkelola/constants/images.dart';
 import 'package:terkelola/ui/pages/intro/intro_screen.dart';
@@ -48,11 +49,7 @@ class _SplashScreenState extends State<SplashScreen> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                SvgPicture.asset(icLogo, width: 60,),
-                SizedBox(width: 4,),
-                Text("terkelola",
-                    style: TextStyle(
-                        color: white, fontSize: 48, fontWeight: FontWeight.w400)),
+                SvgPicture.asset(icLogo, width: ScreenUtils.getScreenWidth(context) - 120,),
               ],
             ),
           ),

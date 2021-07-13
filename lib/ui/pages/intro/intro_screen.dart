@@ -5,6 +5,7 @@ import 'package:introduction_screen/introduction_screen.dart';
 import 'package:terkelola/commons/screen_utils.dart';
 import 'package:terkelola/constants/colors.dart';
 import 'package:terkelola/constants/images.dart';
+import 'package:terkelola/ui/pages/login/login_screen.dart';
 
 class IntroScreen extends StatelessWidget {
   @override
@@ -47,7 +48,11 @@ class IntroScreen extends StatelessWidget {
         ),
       ],
       onDone: () {
-        // When done button is press
+        Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(
+                builder: (context) => LoginScreen()),
+            (r) => false);
       },
       showNextButton: true,
       showSkipButton: true,
