@@ -7,6 +7,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:terkelola/commons/multilanguage.dart';
 import 'package:terkelola/constants/colors.dart';
 import 'package:terkelola/constants/images.dart';
+import 'package:terkelola/ui/pages/intro/intro_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -94,8 +95,7 @@ class _SplashScreenState extends State<SplashScreen> {
     //   //             )),
     //   //     (r) => false);
     // } else {
-    //   Navigator.pushAndRemoveUntil(context,
-    //       MaterialPageRoute(builder: (context) => IntroScreen()), (r) => false);
-    // }
+      Navigator.pushAndRemoveUntil(context,
+          MaterialPageRoute(builder: (context) => IntroScreen()), (r) => false);
   }
 }
