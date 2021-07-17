@@ -1,12 +1,13 @@
-import 'package:terkelola/routes.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:terkelola/routes.dart';
 
 import 'commons/nav_key.dart';
 import 'constants/colors.dart';
@@ -15,13 +16,19 @@ Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await dotenv.load(fileName: '.env');
   await Firebase.initializeApp();
-  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+
+  if ((defaultTargetPlatform == TargetPlatform.iOS) ||
+      (defaultTargetPlatform == TargetPlatform.android)) {
+    FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+  } else {
+    NavKey.isRunningWeb = true;
+  }
+
   // await getPEMKeyCert();
   runApp(MyApp());
 }
 
-Future<void> _firebaseMessagingBackgroundHandler(
-    RemoteMessage message) async {
+Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   print("Handling a background message: ${message.messageId}");
 }
 
@@ -43,8 +50,10 @@ class _MyAppState extends State<MyApp> {
   void initState() {
     super.initState();
 
-    initializeFlutterLocalNotification();
-    initializeFirebase();
+    if (!NavKey.isRunningWeb) {
+      initializeFlutterLocalNotification();
+      initializeFirebase();
+    }
   }
 
   Future<dynamic> onSelectNotification(String? payload) async {
@@ -60,8 +69,12 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
+    var startRoute = "/";
+    if (NavKey.isRunningWeb) {
+      startRoute = "/login";
+    }
     return MaterialApp(
-      title: "Base Flutter 2",
+      title: "Terkelola",
       navigatorKey: NavKey.navKey,
       theme: new ThemeData(
           primaryColor: primary,
@@ -72,7 +85,7 @@ class _MyAppState extends State<MyApp> {
           accentColor: accent,
           fontFamily: "NunitoSans",
           canvasColor: Colors.white),
-      initialRoute: "/",
+      initialRoute: startRoute,
       routes: routes,
     );
   }
@@ -152,7 +165,8 @@ class _MyAppState extends State<MyApp> {
       }
     });
 
-    NotificationSettings settings = await _firebaseMessaging.requestPermission( // ignore: unused_local_variable
+    NotificationSettings settings = await _firebaseMessaging.requestPermission(
+      // ignore: unused_local_variable
       alert: true,
       announcement: false,
       badge: true,
@@ -167,6 +181,4 @@ class _MyAppState extends State<MyApp> {
       sound: true,
     );
   }
-
-
 }
