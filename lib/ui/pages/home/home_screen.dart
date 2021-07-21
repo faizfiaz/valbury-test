@@ -1,48 +1,38 @@
-
-import 'package:terkelola/commons/base_state_widget.dart';
-import 'package:terkelola/commons/multilanguage.dart';
-import 'package:terkelola/commons/nav_key.dart';
-import 'package:terkelola/commons/screen_utils.dart';
-import 'package:terkelola/constants/colors.dart';
-import 'package:terkelola/constants/images.dart';
-import 'package:terkelola/model/error/error_message.dart';
-import 'package:terkelola/ui/widgets/app_bar_custom.dart';
-import 'package:terkelola/ui/widgets/default_button.dart';
-import 'package:terkelola/ui/widgets/loading_indicator.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
+import 'package:terkelola/commons/base_state_widget.dart';
+import 'package:terkelola/constants/colors.dart';
+import 'package:terkelola/ui/widgets/app_bar_custom.dart';
+import 'package:terkelola/ui/widgets/loading_indicator.dart';
 
-import 'empty_navigator.dart';
-import 'empty_view_model.dart';
+import 'home_navigator.dart';
+import 'home_view_model.dart';
 
-class EmptyScreen extends StatefulWidget { // ignore: must_be_immutable
+class HomeScreen extends StatefulWidget {
 
-  EmptyScreen();
+  HomeScreen();
 
   @override
   State<StatefulWidget> createState() {
-    return _EmptyScreen();
+    return _HomeScreen();
   }
 }
 
-class _EmptyScreen extends BaseStateWidget<EmptyScreen>
-    implements EmptyNavigator {
-  late EmptyViewModel _viewModel;
+class _HomeScreen extends BaseStateWidget<HomeScreen> implements HomeNavigator {
+  late HomeViewModel _viewModel;
 
   @override
   void initState() {
     super.initState();
-    _viewModel = EmptyViewModel().setView(this) as EmptyViewModel;
+    _viewModel = HomeViewModel().setView(this) as HomeViewModel;
   }
 
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    return ChangeNotifierProvider<EmptyViewModel>(
+    return ChangeNotifierProvider<HomeViewModel>(
         create: (context) => _viewModel,
-        child: Consumer<EmptyViewModel>(
+        child: Consumer<HomeViewModel>(
             builder: (context, viewModel, _) => Scaffold(
                   appBar: AppBarCustom.trans() as PreferredSizeWidget?,
                   backgroundColor: white,

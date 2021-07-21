@@ -7,6 +7,7 @@ import 'package:flutter/services.dart' show rootBundle;
 import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:terkelola/data/local/user_preferences.dart';
 import 'package:terkelola/routes.dart';
 
 import 'commons/nav_key.dart';
@@ -162,6 +163,12 @@ class _MyAppState extends State<MyApp> {
       onBackgroundMessage(message.data);
       if (message.notification != null) {
         print('Message also contained a notification: ${message.notification}');
+      }
+    });
+
+    _firebaseMessaging.getToken().then((value) {
+      if (value != null) {
+        UserPreferences().setFirebaseToken(value);
       }
     });
 

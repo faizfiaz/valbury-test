@@ -4,5 +4,6 @@
   "login": "Login",
   "login_with": "Login With",
   "signup_message": "Don't Have Account?",
-  "signup_here": "Register Here"
+  "signup_here": "Register Here",
+  "loading_text": "Please wait..."
 }

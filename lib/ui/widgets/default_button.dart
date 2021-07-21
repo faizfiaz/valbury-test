@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:terkelola/constants/colors.dart';
 
 class DefaultButton {
   static Widget redButton(
@@ -7,7 +8,9 @@ class DefaultButton {
       width: double.infinity,
       height: 42,
       child: ElevatedButton(
-          style: ButtonStyle(),
+          style: ButtonStyle(
+            backgroundColor: MaterialStateProperty.all(primary)
+          ),
           child: Text(
             text,
             style: TextStyle(fontWeight: FontWeight.w600, fontSize: 12),

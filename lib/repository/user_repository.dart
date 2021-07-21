@@ -14,7 +14,7 @@ class UserRepository extends BaseRepository {
       required String password,
       required String firebaseToken}) async {
     await dioClient.post(UserEndpoint.urlLogin, data: {
-      "identity": email,
+      "email": email,
       "password": password,
       "firebase_token": firebaseToken
     }).then((value) {

@@ -21,24 +21,21 @@ class UserUsecase extends IUserUsecase {
             email: email, password: password, firebaseToken: firebaseToken)
         .then((val) {
       responseLogin = val;
-      userSp.setToken(responseLogin!.data!.token!);
+      if (responseLogin != null &&
+          responseLogin!.data != null &&
+          responseLogin!.data!.token != null) {
+        userSp.setToken(responseLogin!.data!.token!);
+      }
     }).catchError((e) async {
       mappingError(error, e).then((value) => error = value);
     });
     return Future.value({responseLogin: error});
   }
 
-  Future<String> getFirebaseToken() async {
-    String token = await userSp.getFirebaseToken();
-    if (token != null) { // ignore: unnecessary_null_comparison
-      return token;
-    }
-    return "";
-  }
-
   hasToken() async {
     String token = await userSp.getToken();
-    if (token != null) { // ignore: unnecessary_null_comparison
+    if (token != null) {
+      // ignore: unnecessary_null_comparison
       return true;
     }
     return false;

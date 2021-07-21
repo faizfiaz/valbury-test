@@ -34,7 +34,7 @@ class UserPreferences {
       final _dctr = _e.decrypt64(data, iv: iv);
       return Future.value(_dctr);
     } else {
-      return Future.value(null);
+      return Future.value("");
     }
   }
 
@@ -64,7 +64,7 @@ class UserPreferences {
     if (data != null) {
       return Future.value(data);
     } else {
-      return Future.value(null);
+      return Future.value("");
     }
   }
 
