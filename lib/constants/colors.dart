@@ -15,9 +15,10 @@ const Color white = Color(0xFFFFFFFF);
 const Color whiteTrans = Color(0x10000000);
 const Color whiteTransHigh = Color(0x30000000);
 
-const Color black = Color(0x000000);
+const Color black = Color(0xFF000000);
 const Color blackTrans = Color(0x55000000);
 const Color blackTransHigh = Color(0x70000000);
 
 const Color primaryText = Color(0xFF373939);
 const Color greyLine = Color(0xFFD9D9D9);
+const Color greyDummy = Color(0xFFEFEFEF);

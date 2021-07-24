@@ -172,8 +172,7 @@ class _MyAppState extends State<MyApp> {
       }
     });
 
-    NotificationSettings settings = await _firebaseMessaging.requestPermission(
-      // ignore: unused_local_variable
+    await _firebaseMessaging.requestPermission(
       alert: true,
       announcement: false,
       badge: true,

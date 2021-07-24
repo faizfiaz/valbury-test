@@ -6,11 +6,13 @@ import 'package:introduction_screen/introduction_screen.dart';
 import 'package:terkelola/commons/screen_utils.dart';
 import 'package:terkelola/constants/colors.dart';
 import 'package:terkelola/constants/images.dart';
+import 'package:terkelola/data/local/user_preferences.dart';
 import 'package:terkelola/ui/pages/login/login_screen.dart';
 
 class IntroScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    UserPreferences().setAlreadySeenIntro();
     SystemChrome.setEnabledSystemUIOverlays(SystemUiOverlay.values);
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark);
     return Scaffold(
@@ -20,7 +22,10 @@ class IntroScreen extends StatelessWidget {
           title: "Bayar Iuran Dengan Mudah",
           body:
               "Pilihan Pembayaran yang bervariasi memudahkan Anda dalam membayar iuran kepada Pengelola Anda",
-          image: SvgPicture.asset(imageIntro1, width: ScreenUtils.getScreenWidth(context) - 80,),
+          image: SvgPicture.asset(
+            imageIntro1,
+            width: ScreenUtils.getScreenWidth(context) - 80,
+          ),
           decoration: PageDecoration(
               titleTextStyle: TextStyle(
                   fontSize: 24, fontWeight: FontWeight.w600, color: primary),
@@ -31,7 +36,10 @@ class IntroScreen extends StatelessWidget {
           title: "Pengingat Iuran",
           body:
               "Tidak ada lagi kata terlambat dalam pembayaran iuran, kami akan mengingatkan Anda jika sudah waktunya untuk pembayaran",
-          image: SvgPicture.asset(imageIntro2, width: ScreenUtils.getScreenWidth(context) - 80,),
+          image: SvgPicture.asset(
+            imageIntro2,
+            width: ScreenUtils.getScreenWidth(context) - 80,
+          ),
           decoration: PageDecoration(
               titleTextStyle: TextStyle(
                   fontSize: 24, fontWeight: FontWeight.w600, color: primary),
@@ -42,7 +50,10 @@ class IntroScreen extends StatelessWidget {
           title: "PPOB Dalam Genggaman Anda",
           body:
               "Beli Kebutuhan rumah Anda dengan mudah, seperti Token Listrik, PDAM, Telkom dan banyak lagi",
-          image: SvgPicture.asset(imageIntro3, width: ScreenUtils.getScreenWidth(context) - 80,),
+          image: SvgPicture.asset(
+            imageIntro3,
+            width: ScreenUtils.getScreenWidth(context) - 80,
+          ),
           decoration: PageDecoration(
               titleTextStyle: TextStyle(
                   fontSize: 24, fontWeight: FontWeight.w600, color: primary),
@@ -53,13 +64,12 @@ class IntroScreen extends StatelessWidget {
       onDone: () {
         Navigator.pushAndRemoveUntil(
             context,
-            MaterialPageRoute(
-                builder: (context) => LoginScreen()),
+            MaterialPageRoute(builder: (context) => LoginScreen()),
             (r) => false);
       },
       showNextButton: true,
       showSkipButton: true,
-          curve: Curves.bounceIn,
+      curve: Curves.bounceIn,
       dotsDecorator: DotsDecorator(activeColor: primary),
       skip: Text("Skip", style: TextStyle(fontWeight: FontWeight.w400)),
       skipColor: secondary,

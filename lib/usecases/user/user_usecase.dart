@@ -31,21 +31,4 @@ class UserUsecase extends IUserUsecase {
     });
     return Future.value({responseLogin: error});
   }
-
-  hasToken() async {
-    String token = await userSp.getToken();
-    if (token != null) {
-      // ignore: unnecessary_null_comparison
-      return true;
-    }
-    return false;
-  }
-
-  setAlreadySeenIntro() async {
-    await userSp.setAlreadySeenIntro();
-  }
-
-  hasSeenIntro() async {
-    return await userSp.hasSeenIntro();
-  }
 }

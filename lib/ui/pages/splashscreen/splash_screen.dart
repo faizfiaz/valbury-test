@@ -9,7 +9,10 @@ import 'package:terkelola/commons/multilanguage.dart';
 import 'package:terkelola/commons/screen_utils.dart';
 import 'package:terkelola/constants/colors.dart';
 import 'package:terkelola/constants/images.dart';
+import 'package:terkelola/data/local/user_preferences.dart';
+import 'package:terkelola/ui/pages/home/home_screen.dart';
 import 'package:terkelola/ui/pages/intro/intro_screen.dart';
+import 'package:terkelola/ui/pages/login/login_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -53,7 +56,10 @@ class _SplashScreenState extends State<SplashScreen> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                SvgPicture.asset(icLogo, width: ScreenUtils.getScreenWidth(context) - 120,),
+                SvgPicture.asset(
+                  icLogo,
+                  width: ScreenUtils.getScreenWidth(context) - 120,
+                ),
               ],
             ),
           ),
@@ -85,18 +91,35 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   void navigatePage() async {
-    // var alreadyLogin = await usecase.hasToken();
-    // if (await usecase.hasSeenIntro() == true) {
-    //   // Navigator.pushAndRemoveUntil(
-    //   //     context,
-    //   //     MaterialPageRoute(
-    //   //         builder: (context) => HomeScreen(
-    //   //               0,
-    //   //               alreadyLogin: alreadyLogin,
-    //   //             )),
-    //   //     (r) => false);
-    // } else {
-      Navigator.pushAndRemoveUntil(context,
-          MaterialPageRoute(builder: (context) => IntroScreen()), (r) => false);
+    UserPreferences userPreferences = UserPreferences();
+    userPreferences.getToken().then((value) {
+      if (value.isNotEmpty) {
+        checkIntroState(userPreferences, true);
+      } else {
+        checkIntroState(userPreferences, false);
+      }
+    });
+  }
+
+  void checkIntroState(UserPreferences userPreferences, bool alreadyLogin) {
+    userPreferences.hasSeenIntro().then((value) {
+      /**
+       * if value false mean not yet see intro
+       * if value true mean already see intro
+       ***/
+      if (!value) {
+        Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(builder: (context) => IntroScreen()),
+            (r) => false);
+      } else {
+        Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(
+                builder: (context) =>
+                    alreadyLogin ? HomeScreen() : LoginScreen()),
+            (r) => false);
+      }
+    });
   }
 }

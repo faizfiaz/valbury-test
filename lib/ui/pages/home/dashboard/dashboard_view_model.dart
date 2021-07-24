@@ -2,12 +2,12 @@ import 'package:terkelola/commons/base_view_model.dart';
 import 'package:terkelola/repository/user_repository.dart';
 import 'package:terkelola/usecases/user/user_usecase.dart';
 
-import 'empty_navigator.dart';
+import 'dashboard_navigator.dart';
 
-class EmptyViewModel extends BaseViewModel<EmptyNavigator> {
+class DashboardViewModel extends BaseViewModel<DashboardNavigator> {
   late UserUsecase _usecase;
 
-  EmptyViewModel() {
+  DashboardViewModel() {
     _usecase = new UserUsecase(UserRepository(dioClient));
   }
 }
