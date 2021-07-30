@@ -1,65 +1,54 @@
-import 'package:terkelola/constants/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:terkelola/constants/colors.dart';
+import 'package:terkelola/constants/styles.dart';
 
 class AppBarCustom {
   static Widget buildAppBar(BuildContext context, title) {
     return AppBar(
-      backgroundColor: primary,
+      backgroundColor: white,
       centerTitle: true,
       titleSpacing: 0,
-      elevation: 0,
-      title: Container(
-        alignment: Alignment.centerLeft,
-        child: Text(
-          title,
-          textAlign: TextAlign.start,
-          style: TextStyle(
-              color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),
-        ),
+      elevation: 1,
+      leadingWidth: 64,
+      title: Text(
+        title,
+        textAlign: TextAlign.center,
+        style: BaseStyle.textBold20,
       ),
       leading: IconButton(
         iconSize: 28,
-        icon: Icon(Icons.arrow_back_ios, color: Colors.white),
+        icon: Icon(Icons.arrow_back, color: primaryText),
         onPressed: () => Navigator.of(context).pop(),
       ),
     );
   }
 
-  static Widget buildAppBarInverse(BuildContext context, title) {
+  static Widget buildAppBarActionText(
+      BuildContext context, title, actionImage, Function() listener) {
     return AppBar(
-      backgroundColor: Colors.white,
+      backgroundColor: white,
       centerTitle: true,
-      brightness: Brightness.light,
       titleSpacing: 0,
-      elevation: 0,
-      title: Container(
-        alignment: Alignment.centerLeft,
-        child: Text(
-          title,
-          textAlign: TextAlign.start,
-          style: TextStyle(
-              color: primary, fontSize: 20, fontWeight: FontWeight.bold),
-        ),
+      elevation: 1,
+      leadingWidth: 64,
+      title: Text(
+        title,
+        textAlign: TextAlign.center,
+        style: BaseStyle.textBold20,
       ),
       leading: IconButton(
         iconSize: 28,
-        icon: Icon(Icons.arrow_back_ios, color: primary),
+        icon: Icon(Icons.arrow_back, color: primaryText),
         onPressed: () => Navigator.of(context).pop(),
       ),
-    );
-  }
-
-  static Widget buildAppBarNoTitleTrans(BuildContext context) {
-    return AppBar(
-      brightness: Brightness.light,
-      backgroundColor: Colors.transparent,
-      centerTitle: true,
-      elevation: 0,
-      leading: IconButton(
-        iconSize: 28,
-        icon: Icon(Icons.arrow_back_ios, color: primary),
-        onPressed: () => Navigator.of(context).pop(),
-      ),
+      actions: [
+        Center(
+            child: IconButton(
+              iconSize: 24,
+              icon: Icon(actionImage, color: Colors.green),
+              onPressed: () => Navigator.of(context).pop(),
+            ))
+      ],
     );
   }
 

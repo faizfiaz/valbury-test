@@ -6,6 +6,8 @@ const String imageIntro1 = pathImage + "intro_1.svg";
 const String imageIntro2 = pathImage + "intro_2.svg";
 const String imageIntro3 = pathImage + "intro_3.svg";
 const String bgHomeOval = pathImage + "bg_home_oval.svg";
+const String dummyUser = pathImage + "dummy_user.png";
+const String dummyUser2 = pathImage + "dummy_user_2.png";
 
 /*ICONS*/
 const String icLogo = pathIcons + "ic_logo.svg";
@@ -15,6 +17,7 @@ const String icFacebook = pathIcons + "ic_facebook.svg";
 const String icGoogle = pathIcons + "ic_google_plus.svg";
 const String icNotificationHome = pathIcons + "ic_notification_home.svg";
 const String icHomePlace = pathIcons + "ic_home_place.svg";
+const String icClockNotification = pathIcons + "ic_clock_notification.svg";
 
 //Home Menu Bottom
 const String icHome = pathIcons + "ic_home.svg";

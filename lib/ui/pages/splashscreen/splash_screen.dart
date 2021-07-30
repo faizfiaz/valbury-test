@@ -5,14 +5,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:terkelola/commons/base_state_widget.dart';
 import 'package:terkelola/commons/multilanguage.dart';
 import 'package:terkelola/commons/screen_utils.dart';
 import 'package:terkelola/constants/colors.dart';
 import 'package:terkelola/constants/images.dart';
 import 'package:terkelola/data/local/user_preferences.dart';
-import 'package:terkelola/ui/pages/home/home_screen.dart';
-import 'package:terkelola/ui/pages/intro/intro_screen.dart';
-import 'package:terkelola/ui/pages/login/login_screen.dart';
+import 'package:terkelola/routes.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -21,7 +20,7 @@ class SplashScreen extends StatefulWidget {
   }
 }
 
-class _SplashScreenState extends State<SplashScreen> {
+class _SplashScreenState extends BaseStateWidget<SplashScreen> {
   @override
   void initState() {
     super.initState();
@@ -87,10 +86,10 @@ class _SplashScreenState extends State<SplashScreen> {
 
   startTimer() async {
     var duration = new Duration(seconds: 3);
-    return new Timer(duration, navigatePage);
+    return new Timer(duration, checkToken);
   }
 
-  void navigatePage() async {
+  void checkToken() async {
     UserPreferences userPreferences = UserPreferences();
     userPreferences.getToken().then((value) {
       if (value.isNotEmpty) {
@@ -108,17 +107,11 @@ class _SplashScreenState extends State<SplashScreen> {
        * if value true mean already see intro
        ***/
       if (!value) {
-        Navigator.pushAndRemoveUntil(
-            context,
-            MaterialPageRoute(builder: (context) => IntroScreen()),
-            (r) => false);
+        navigatePage(introRN, clearBackStack: true);
       } else {
-        Navigator.pushAndRemoveUntil(
-            context,
-            MaterialPageRoute(
-                builder: (context) =>
-                    alreadyLogin ? HomeScreen() : LoginScreen()),
-            (r) => false);
+        alreadyLogin
+            ? navigatePage(homeRN, clearBackStack: true)
+            : navigatePage(loginRN, clearBackStack: true);
       }
     });
   }

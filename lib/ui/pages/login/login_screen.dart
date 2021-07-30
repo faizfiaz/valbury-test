@@ -10,7 +10,7 @@ import 'package:terkelola/constants/colors.dart';
 import 'package:terkelola/constants/images.dart';
 import 'package:terkelola/constants/styles.dart';
 import 'package:terkelola/model/error/error_message.dart';
-import 'package:terkelola/ui/pages/home/home_screen.dart';
+import 'package:terkelola/routes.dart';
 import 'package:terkelola/ui/widgets/default_button.dart';
 import 'package:terkelola/ui/widgets/loading_indicator.dart';
 
@@ -101,8 +101,7 @@ class _LoginScreen extends BaseStateWidget<LoginScreen>
 
   @override
   void showMainPage() {
-    Navigator.pushAndRemoveUntil(context,
-        MaterialPageRoute(builder: (context) => HomeScreen()), (r) => false);
+    navigatePage(homeRN, clearBackStack: true);
   }
 
   Widget buildContentLogin() {
