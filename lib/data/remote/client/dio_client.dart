@@ -160,17 +160,17 @@ class DioClient {
     options.headers?.addAll(addCustomHeaders(currentLanguage));
 
     try {
-      (_dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate =
-          (HttpClient client) {
-        client.badCertificateCallback =
-            (X509Certificate cert, String host, int port) {
-          //if (cert.pem == NavKey.pemKey) {
-          return true;
-          //}
-          //return false;
-        };
-        return client;
-      };
+      // (_dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate =
+      //     (HttpClient client) {
+      //   client.badCertificateCallback =
+      //       (X509Certificate cert, String host, int port) {
+      //     //if (cert.pem == NavKey.pemKey) {
+      //     return true;
+      //     //}
+      //     //return false;
+      //   };
+      //   return client;
+      // };
       final Response response = await _dio.post(
         uri,
         data: data,

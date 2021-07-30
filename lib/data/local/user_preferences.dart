@@ -13,29 +13,29 @@ class UserPreferences {
   static String _hk = "Wa!s7fCAQXGJHrVwYTiCoRcKOjnprhav";
 
   Future<bool> setToken(String token) async {
-    final key = Key.fromUtf8(_hk);
-    final iv = IV.fromLength(16);
-
-    final _e = Encrypter(AES(key));
-    final _edr = _e.encrypt(token, iv: iv);
-    final secureStorage = FlutterSecureStorage();
-    await secureStorage.write(key: token_key, value: _edr.base64);
+    // final key = Key.fromUtf8(_hk);
+    // final iv = IV.fromLength(16);
+    //
+    // final _e = Encrypter(AES(key));
+    // final _edr = _e.encrypt(token, iv: iv);
+    // final secureStorage = FlutterSecureStorage();
+    // await secureStorage.write(key: token_key, value: _edr.base64);
     return true;
   }
 
   Future<String> getToken() async {
-    final secureStorage = FlutterSecureStorage();
-    String? data = await secureStorage.read(key: token_key);
-    if (data != null) {
-      final key = Key.fromUtf8(_hk);
-      final iv = IV.fromLength(16);
-
-      final _e = Encrypter(AES(key));
-      final _dctr = _e.decrypt64(data, iv: iv);
-      return Future.value(_dctr);
-    } else {
+    // final secureStorage = FlutterSecureStorage();
+    // String? data = await secureStorage.read(key: token_key);
+    // if (data != null) {
+    //   final key = Key.fromUtf8(_hk);
+    //   final iv = IV.fromLength(16);
+    //
+    //   final _e = Encrypter(AES(key));
+    //   final _dctr = _e.decrypt64(data, iv: iv);
+    //   return Future.value(_dctr);
+    // } else {
       return Future.value("");
-    }
+    // }
   }
 
   Future<void> setAlreadySeenIntro() async {

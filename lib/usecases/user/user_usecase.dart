@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:terkelola/data/local/user_preferences.dart';
 import 'package:terkelola/model/error/error_message.dart';
 import 'package:terkelola/model/response/response_login.dart';
@@ -15,7 +16,11 @@ class UserUsecase extends IUserUsecase {
       String email, String password) async {
     disposeVariable();
     ResponseLogin? responseLogin;
-    String firebaseToken = await userSp.getFirebaseToken();
+    String firebaseToken = "";
+    if ((defaultTargetPlatform == TargetPlatform.iOS) ||
+        (defaultTargetPlatform == TargetPlatform.android)) {
+      firebaseToken = await userSp.getFirebaseToken();
+    }
     await repository
         .authenticate(
             email: email, password: password, firebaseToken: firebaseToken)
@@ -27,6 +32,7 @@ class UserUsecase extends IUserUsecase {
         userSp.setToken(responseLogin!.data!.token!);
       }
     }).catchError((e) async {
+      print("KESINI");
       mappingError(error, e).then((value) => error = value);
     });
     return Future.value({responseLogin: error});

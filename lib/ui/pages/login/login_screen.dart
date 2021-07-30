@@ -101,8 +101,9 @@ class _LoginScreen extends BaseStateWidget<LoginScreen>
 
   @override
   void showMainPage() {
-    Navigator.pushAndRemoveUntil(context,
-        MaterialPageRoute(builder: (context) => HomeScreen()), (r) => false);
+    Navigator.pushNamedAndRemoveUntil(context, "/home", (route) => false);
+    // Navigator.pushAndRemoveUntil(context,
+    //     MaterialPageRoute(builder: (context) => HomeScreen()), (r) => false);
   }
 
   Widget buildContentLogin() {

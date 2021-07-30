@@ -41,6 +41,7 @@ class LoginViewModel extends BaseViewModel<LoginNavigator> {
         getView()?.showError(
             value.values.first!.errors, value.values.first!.httpCode);
       } else {
+        print("MASUKBOS");
         getView()?.showMainPage();
       }
       // ignore: return_of_invalid_type_from_catch_error

@@ -243,7 +243,7 @@ class _DashboardScreen extends BaseStateWidget<DashboardScreen>
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           titleSection("Promo"),
-          PromoListWidget(data: [], isLoading: true)
+          // PromoListWidget(data: [], isLoading: true)
         ],
       ),
     );
@@ -267,7 +267,7 @@ class _DashboardScreen extends BaseStateWidget<DashboardScreen>
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           titleSection("Berita"),
-          NewsListWidget(data: [], isLoading: true)
+          // NewsListWidget(data: [], isLoading: true)
         ],
       ),
     );
@@ -281,7 +281,7 @@ class _DashboardScreen extends BaseStateWidget<DashboardScreen>
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           titleSection("Lebih dekat dengan Terkelola"),
-          NewsListWidget(data: [], isLoading: true)
+          // NewsListWidget(data: [], isLoading: true)
         ],
       ),
     );
