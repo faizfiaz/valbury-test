@@ -85,28 +85,28 @@ class _HomeScreen extends BaseStateWidget<HomeScreen> implements HomeNavigator {
               opacity: opacityInActive,
             ),
             activeIcon: SvgPicture.asset(icHome),
-            label: ""),
+            label: "Beranda"),
         BottomNavigationBarItem(
             icon: Opacity(
               child: SvgPicture.asset(icPPOB),
               opacity: opacityInActive,
             ),
             activeIcon: SvgPicture.asset(icPPOB),
-            label: ""),
+            label: "PPOB"),
         BottomNavigationBarItem(
             icon: Opacity(
               child: SvgPicture.asset(icHistory),
               opacity: opacityInActive,
             ),
             activeIcon: SvgPicture.asset(icHistory),
-            label: ""),
+            label: "Riwayat Transaksi"),
         BottomNavigationBarItem(
             icon: Opacity(
               child: SvgPicture.asset(icProfile),
               opacity: opacityInActive,
             ),
             activeIcon: SvgPicture.asset(icProfile),
-            label: ""),
+            label: "Akun"),
       ],
     );
   }
