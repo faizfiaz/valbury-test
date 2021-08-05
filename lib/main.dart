@@ -26,7 +26,9 @@ Future main() async {
   }
 
   // await getPEMKeyCert();
-  runApp(MyApp());
+  runApp(Container(
+    color: NavKey.isRunningWeb ? primaryTrans : Colors.white,
+      child: Center(child: SizedBox(width:NavKey.isRunningWeb ? NavKey.widthWeb : double.infinity,child: MyApp()))));
 }
 
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:terkelola/commons/base_view_model.dart';
 import 'package:terkelola/commons/email_validator.dart';
+import 'package:terkelola/data/local/user_preferences.dart';
 import 'package:terkelola/repository/user_repository.dart';
 import 'package:terkelola/usecases/user/user_usecase.dart';
 
@@ -31,6 +32,18 @@ class LoginViewModel extends BaseViewModel<LoginNavigator> {
     notifyListeners();
   }
 
+  void checkToken() {
+    showLoading(true);
+    UserPreferences userPreferences = UserPreferences();
+    userPreferences.getToken().then((value) {
+      print(value);
+      if (value.isNotEmpty) {
+        getView()?.showMainPage();
+      }
+    });
+    showLoading(false);
+  }
+
   doLogin() async {
     showLoading(true);
     await _usecase
@@ -41,7 +54,6 @@ class LoginViewModel extends BaseViewModel<LoginNavigator> {
         getView()?.showError(
             value.values.first!.errors, value.values.first!.httpCode);
       } else {
-        print("MASUKBOS");
         getView()?.showMainPage();
       }
       // ignore: return_of_invalid_type_from_catch_error

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 import 'package:terkelola/commons/base_state_widget.dart';
+import 'package:terkelola/commons/nav_key.dart';
 import 'package:terkelola/constants/colors.dart';
 import 'package:terkelola/constants/images.dart';
 import 'package:terkelola/constants/styles.dart';
@@ -243,7 +244,7 @@ class _DashboardScreen extends BaseStateWidget<DashboardScreen>
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           titleSection("Promo"),
-          // PromoListWidget(data: [], isLoading: true)
+          PromoListWidget(data: [], isLoading: true)
         ],
       ),
     );
@@ -267,7 +268,7 @@ class _DashboardScreen extends BaseStateWidget<DashboardScreen>
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           titleSection("Berita"),
-          // NewsListWidget(data: [], isLoading: true)
+          NewsListWidget(data: [], isLoading: true)
         ],
       ),
     );
@@ -281,7 +282,7 @@ class _DashboardScreen extends BaseStateWidget<DashboardScreen>
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           titleSection("Lebih dekat dengan Terkelola"),
-          // NewsListWidget(data: [], isLoading: true)
+          NewsListWidget(data: [], isLoading: true)
         ],
       ),
     );

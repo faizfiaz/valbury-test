@@ -6,6 +6,7 @@ const String imageIntro1 = pathImage + "intro_1.svg";
 const String imageIntro2 = pathImage + "intro_2.svg";
 const String imageIntro3 = pathImage + "intro_3.svg";
 const String bgHomeOval = pathImage + "bg_home_oval.svg";
+const String bgHomeOvalWeb = pathImage + "bg_home_oval_web.svg";
 
 /*ICONS*/
 const String icLogo = pathIcons + "ic_logo.svg";

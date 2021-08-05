@@ -1,7 +1,7 @@
-
 import 'package:encrypt/encrypt.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:terkelola/commons/nav_key.dart';
 
 class UserPreferences {
   static const String user_key = "userData";
@@ -13,29 +13,53 @@ class UserPreferences {
   static String _hk = "Wa!s7fCAQXGJHrVwYTiCoRcKOjnprhav";
 
   Future<bool> setToken(String token) async {
-    // final key = Key.fromUtf8(_hk);
-    // final iv = IV.fromLength(16);
-    //
-    // final _e = Encrypter(AES(key));
-    // final _edr = _e.encrypt(token, iv: iv);
-    // final secureStorage = FlutterSecureStorage();
-    // await secureStorage.write(key: token_key, value: _edr.base64);
-    return true;
+    final key = Key.fromUtf8(_hk);
+    final iv = IV.fromLength(16);
+
+    final _e = Encrypter(AES(key));
+    final _edr = _e.encrypt(token, iv: iv);
+
+    if (NavKey.isRunningWeb) {
+      final SharedPreferences preferences =
+          await SharedPreferences.getInstance();
+      preferences.setString(token_key, _edr.base64);
+      return true;
+    } else {
+      final secureStorage = FlutterSecureStorage();
+      await secureStorage.write(key: token_key, value: _edr.base64);
+      return true;
+    }
   }
 
   Future<String> getToken() async {
-    // final secureStorage = FlutterSecureStorage();
-    // String? data = await secureStorage.read(key: token_key);
-    // if (data != null) {
-    //   final key = Key.fromUtf8(_hk);
-    //   final iv = IV.fromLength(16);
-    //
-    //   final _e = Encrypter(AES(key));
-    //   final _dctr = _e.decrypt64(data, iv: iv);
-    //   return Future.value(_dctr);
-    // } else {
-      return Future.value("");
-    // }
+    if (NavKey.isRunningWeb) {
+      final SharedPreferences preferences =
+          await SharedPreferences.getInstance();
+      String? data = preferences.getString(token_key);
+      if (data != null) {
+        final key = Key.fromUtf8(_hk);
+        final iv = IV.fromLength(16);
+
+        final _e = Encrypter(AES(key));
+        final _dctr = _e.decrypt64(data, iv: iv);
+        return Future.value(_dctr);
+      } else {
+        return Future.value("");
+      }
+    } else {
+      final secureStorage = FlutterSecureStorage();
+      String? data = await secureStorage.read(key: token_key);
+      if (data != null) {
+        final key = Key.fromUtf8(_hk);
+        final iv = IV.fromLength(16);
+
+        final _e = Encrypter(AES(key));
+        final _dctr = _e.decrypt64(data, iv: iv);
+        return Future.value(_dctr);
+      } else {
+        return Future.value("");
+      }
+    }
   }
 
   Future<void> setAlreadySeenIntro() async {
