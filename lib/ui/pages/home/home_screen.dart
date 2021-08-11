@@ -6,6 +6,7 @@ import 'package:terkelola/constants/colors.dart';
 import 'package:terkelola/constants/images.dart';
 import 'package:terkelola/ui/pages/empty/empty_screen.dart';
 import 'package:terkelola/ui/pages/home/dashboard/dashboard_screen.dart';
+import 'package:terkelola/ui/pages/home/home_listener.dart';
 import 'package:terkelola/ui/pages/home/profile/profile_screen.dart';
 import 'package:terkelola/ui/pages/home/services/services_screen.dart';
 
@@ -21,7 +22,7 @@ class HomeScreen extends StatefulWidget {
   }
 }
 
-class _HomeScreen extends BaseStateWidget<HomeScreen> implements HomeNavigator {
+class _HomeScreen extends BaseStateWidget<HomeScreen> implements HomeNavigator, HomeListener {
   late HomeViewModel _viewModel;
 
   final List<Widget> screens = [];
@@ -31,7 +32,7 @@ class _HomeScreen extends BaseStateWidget<HomeScreen> implements HomeNavigator {
   @override
   void initState() {
     super.initState();
-    screens.add(DashboardScreen());
+    screens.add(DashboardScreen(this));
     screens.add(ServicesScreen());
     screens.add(EmptyScreen());
     screens.add(ProfileScreen());
@@ -74,11 +75,7 @@ class _HomeScreen extends BaseStateWidget<HomeScreen> implements HomeNavigator {
       type: BottomNavigationBarType.fixed,
       currentIndex: _indexPage,
       onTap: (index) {
-        setState(() {
-          _indexPage = index;
-          _pageController.animateToPage(index,
-              duration: Duration(milliseconds: 500), curve: Curves.easeInBack);
-        });
+        scrollPageNow(index);
       },
       items: [
         BottomNavigationBarItem(
@@ -111,5 +108,18 @@ class _HomeScreen extends BaseStateWidget<HomeScreen> implements HomeNavigator {
             label: "Akun"),
       ],
     );
+  }
+
+  @override
+  onClickOthersPPOB() {
+   scrollPageNow(1);
+  }
+
+  void scrollPageNow(int index) {
+    setState(() {
+      _indexPage = index;
+      _pageController.animateToPage(index,
+          duration: Duration(milliseconds: 500), curve: Curves.easeInBack);
+    });
   }
 }

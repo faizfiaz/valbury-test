@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 import 'package:terkelola/commons/base_state_widget.dart';
-import 'package:terkelola/commons/nav_key.dart';
 import 'package:terkelola/constants/colors.dart';
 import 'package:terkelola/constants/images.dart';
 import 'package:terkelola/constants/styles.dart';
@@ -13,11 +12,14 @@ import 'package:terkelola/ui/widgets/circle_badge_number.dart';
 import 'package:terkelola/ui/widgets/colored_safe_area.dart';
 import 'package:terkelola/ui/widgets/loading_indicator.dart';
 
+import '../home_listener.dart';
 import 'dashboard_navigator.dart';
 import 'dashboard_view_model.dart';
 
 class DashboardScreen extends StatefulWidget {
-  DashboardScreen();
+  HomeListener homeListener;
+
+  DashboardScreen(this.homeListener);
 
   @override
   State<StatefulWidget> createState() {
@@ -128,7 +130,15 @@ class _DashboardScreen extends BaseStateWidget<DashboardScreen>
       width: double.infinity,
       color: Colors.transparent,
       child: Column(
-        children: [buildMenu(), promoSection(), newsSection(), terkelolaSection(), SizedBox(height: 20,)],
+        children: [
+          buildMenu(),
+          promoSection(),
+          newsSection(),
+          terkelolaSection(),
+          SizedBox(
+            height: 20,
+          )
+        ],
       ),
     );
   }
@@ -141,20 +151,21 @@ class _DashboardScreen extends BaseStateWidget<DashboardScreen>
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            itemMenu(icThunder, "Listrik"),
-            itemMenu(icPhone, "Pulsa"),
-            itemMenu(icWater, "Air"),
-            itemMenu(icInternet, "Internet"),
-            itemMenu(icOtherMenuPPOB, "Lainnya"),
+            itemMenu(icThunder, "Listrik", () => actionNow()),
+            itemMenu(icPhone, "Pulsa", () => actionNow()),
+            itemMenu(icWater, "Air", () => actionNow()),
+            itemMenu(icInternet, "Internet", () => actionNow()),
+            itemMenu(icOtherMenuPPOB, "Lainnya",
+                () => widget.homeListener.onClickOthersPPOB()),
           ],
         ),
       ),
     );
   }
 
-  Widget itemMenu(String icon, String text) {
+  Widget itemMenu(String icon, String text, Function() action) {
     return InkWell(
-      onTap: () => print("menuClicked"),
+      onTap: () => action.call(),
       child: Container(
         padding: EdgeInsets.only(left: 12, right: 12, top: 14, bottom: 14),
         child: Column(
@@ -256,7 +267,7 @@ class _DashboardScreen extends BaseStateWidget<DashboardScreen>
 
   Widget titleSection(String text) {
     return Container(
-      margin:EdgeInsets.only(left: 24, bottom: 6),
+      margin: EdgeInsets.only(left: 24, bottom: 6),
       child: Text(
         text,
         style: BaseStyle.textBold16,
@@ -290,5 +301,9 @@ class _DashboardScreen extends BaseStateWidget<DashboardScreen>
         ],
       ),
     );
+  }
+
+  actionNow() {
+    print("action");
   }
 }
