@@ -6,6 +6,7 @@ import 'package:terkelola/commons/nav_key.dart';
 import 'package:terkelola/constants/colors.dart';
 import 'package:terkelola/constants/images.dart';
 import 'package:terkelola/constants/styles.dart';
+import 'package:terkelola/routes.dart';
 import 'package:terkelola/ui/pages/home/dashboard/widget/news_list_widget.dart';
 import 'package:terkelola/ui/pages/home/dashboard/widget/promo_list_widget.dart';
 import 'package:terkelola/ui/widgets/circle_badge_number.dart';
@@ -79,17 +80,20 @@ class _DashboardScreen extends BaseStateWidget<DashboardScreen>
             width: 140,
           ),
           Expanded(child: SizedBox()),
-          Stack(
-            alignment: Alignment.topRight,
-            children: [
-              Padding(
-                padding: EdgeInsets.only(right: 2, top: 2),
-                child: SvgPicture.asset(icNotificationHome),
-              ),
-              CircleBadgeNumber(
-                number: 6,
-              )
-            ],
+          InkWell(
+            onTap: () => navigatePage(notificationRN),
+            child: Stack(
+              alignment: Alignment.topRight,
+              children: [
+                Padding(
+                  padding: EdgeInsets.only(right: 2, top: 2),
+                  child: SvgPicture.asset(icNotificationHome),
+                ),
+                CircleBadgeNumber(
+                  number: 6,
+                )
+              ],
+            ),
           ),
           SizedBox(
             width: 20,

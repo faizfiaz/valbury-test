@@ -1,7 +1,7 @@
-import 'package:terkelola/commons/screen_utils.dart';
-import 'package:terkelola/model/error/error_message.dart';
 import 'package:flutter/material.dart';
 import 'package:need_resume/need_resume.dart';
+import 'package:terkelola/commons/screen_utils.dart';
+import 'package:terkelola/model/error/error_message.dart';
 
 import 'base_navigator.dart';
 import 'multilanguage.dart';
@@ -54,5 +54,21 @@ class BaseStateWidget<S extends StatefulWidget> extends ResumableState<S>
   @override
   void refreshState() {
     setState(() {});
+  }
+
+  void navigatePage(String routeName,
+      {Object? arguments, bool clearBackStack = false}) {
+    clearBackStack
+        ? Navigator.pushNamedAndRemoveUntil(
+            context,
+            routeName,
+            (r) => false,
+            arguments: arguments,
+          )
+        : pushNamed(
+            context,
+            routeName,
+            arguments: arguments,
+          );
   }
 }
