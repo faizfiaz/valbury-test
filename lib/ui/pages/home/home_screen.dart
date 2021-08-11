@@ -6,6 +6,8 @@ import 'package:terkelola/constants/colors.dart';
 import 'package:terkelola/constants/images.dart';
 import 'package:terkelola/ui/pages/empty/empty_screen.dart';
 import 'package:terkelola/ui/pages/home/dashboard/dashboard_screen.dart';
+import 'package:terkelola/ui/pages/home/profile/profile_screen.dart';
+import 'package:terkelola/ui/pages/home/services/services_screen.dart';
 
 import 'home_navigator.dart';
 import 'home_view_model.dart';
@@ -30,9 +32,9 @@ class _HomeScreen extends BaseStateWidget<HomeScreen> implements HomeNavigator {
   void initState() {
     super.initState();
     screens.add(DashboardScreen());
+    screens.add(ServicesScreen());
     screens.add(EmptyScreen());
-    screens.add(EmptyScreen());
-    screens.add(EmptyScreen());
+    screens.add(ProfileScreen());
 
     _viewModel = HomeViewModel().setView(this) as HomeViewModel;
   }

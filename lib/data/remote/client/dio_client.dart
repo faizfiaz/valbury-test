@@ -4,6 +4,7 @@ import 'package:dio/adapter.dart';
 import 'package:dio/dio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:terkelola/commons/multilanguage.dart';
+import 'package:terkelola/commons/nav_key.dart';
 import 'package:terkelola/commons/other_utils.dart';
 import 'package:terkelola/commons/screen_utils.dart';
 import 'package:terkelola/data/local/user_preferences.dart';
@@ -53,17 +54,20 @@ class DioClient {
     options.headers?.addAll(addCustomHeaders(currentLanguage));
 
     try {
-      (_dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate =
-          (HttpClient client) {
-        client.badCertificateCallback =
-            (X509Certificate cert, String host, int port) {
-          // if (cert.pem == NavKey.pemKey) {
-          return true;
-          // }
-          // return false;
+      if(!NavKey.isRunningWeb) {
+        (_dio.httpClientAdapter as DefaultHttpClientAdapter)
+            .onHttpClientCreate =
+            (HttpClient client) {
+          client.badCertificateCallback =
+              (X509Certificate cert, String host, int port) {
+            // if (cert.pem == NavKey.pemKey) {
+            return true;
+            // }
+            // return false;
+          };
+          return client;
         };
-        return client;
-      };
+      }
       final Response response = await _dio.get(
         uri,
         queryParameters: queryParameters,
@@ -105,17 +109,20 @@ class DioClient {
     options.headers?.addAll(addCustomHeaders(currentLanguage));
 
     try {
-      (_dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate =
-          (HttpClient client) {
-        client.badCertificateCallback =
-            (X509Certificate cert, String host, int port) {
-          // if (cert.pem == NavKey.pemKey) {
-          return true;
-          //}
-          //return false;
+      if(!NavKey.isRunningWeb) {
+        (_dio.httpClientAdapter as DefaultHttpClientAdapter)
+            .onHttpClientCreate =
+            (HttpClient client) {
+          client.badCertificateCallback =
+              (X509Certificate cert, String host, int port) {
+            // if (cert.pem == NavKey.pemKey) {
+            return true;
+            //}
+            //return false;
+          };
+          return client;
         };
-        return client;
-      };
+      }
       final Response response = await _dio.delete(
         uri,
         queryParameters: queryParameters,
@@ -160,17 +167,20 @@ class DioClient {
     options.headers?.addAll(addCustomHeaders(currentLanguage));
 
     try {
-      // (_dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate =
-      //     (HttpClient client) {
-      //   client.badCertificateCallback =
-      //       (X509Certificate cert, String host, int port) {
-      //     //if (cert.pem == NavKey.pemKey) {
-      //     return true;
-      //     //}
-      //     //return false;
-      //   };
-      //   return client;
-      // };
+      if(!NavKey.isRunningWeb) {
+        (_dio.httpClientAdapter as DefaultHttpClientAdapter)
+            .onHttpClientCreate =
+            (HttpClient client) {
+          client.badCertificateCallback =
+              (X509Certificate cert, String host, int port) {
+            //if (cert.pem == NavKey.pemKey) {
+            return true;
+            //}
+            //return false;
+          };
+          return client;
+        };
+      }
       final Response response = await _dio.post(
         uri,
         data: data,
@@ -217,17 +227,20 @@ class DioClient {
     options.headers?.addAll(addCustomHeaders(currentLanguage));
 
     try {
-      (_dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate =
-          (HttpClient client) {
-        client.badCertificateCallback =
-            (X509Certificate cert, String host, int port) {
-          //if (cert.pem == NavKey.pemKey) {
-          return true;
-          //}
-          //return false;
-        };
-        return client;
+      if(!NavKey.isRunningWeb) {
+        (_dio.httpClientAdapter as DefaultHttpClientAdapter)
+            .onHttpClientCreate =
+            (HttpClient client) {
+          client.badCertificateCallback =
+              (X509Certificate cert, String host, int port) {
+            //if (cert.pem == NavKey.pemKey) {
+            return true;
+            //}
+            //return false;
           };
+          return client;
+        };
+      }
       final Response response = await _dio.put(
         uri,
         data: data,
