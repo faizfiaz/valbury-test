@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 import 'package:valburytest/commons/base_state_widget.dart';
+import 'package:valburytest/commons/nav_key.dart';
 import 'package:valburytest/constants/colors.dart';
 import 'package:valburytest/constants/images.dart';
 import 'package:valburytest/ui/pages/empty/empty_screen.dart';
@@ -35,6 +36,10 @@ class _HomeScreen extends BaseStateWidget<HomeScreen> implements HomeNavigator {
     screens.add(ProfileScreen());
 
     _viewModel = HomeViewModel().setView(this) as HomeViewModel;
+    if (NavKey.isRunningWeb) {
+      _viewModel.changeLanguage(context);
+      _viewModel.changeLanguage(context);
+    }
   }
 
   @override
