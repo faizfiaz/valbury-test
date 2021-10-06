@@ -19,6 +19,9 @@ samples, guidance on mobile development, and a full API reference.
     For .env file you can get here
     - https://drive.google.com/file/d/1FFvgxjOp6zt-8gVnUVlJCV1iVmD-YQNy/view?usp=sharing
 
+## Code Pattern
+- Using Custom MVVM + Provider to handle state
+
 ## Demo Apps
 
 APK Demo Apps
