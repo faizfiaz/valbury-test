@@ -9,6 +9,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:valburytest/data/local/user_preferences.dart';
 import 'package:valburytest/routes.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 
 import 'commons/nav_key.dart';
 import 'constants/colors.dart';
@@ -18,17 +19,25 @@ Future main() async {
   await dotenv.load(fileName: '.env');
   await Firebase.initializeApp();
 
-  if ((defaultTargetPlatform == TargetPlatform.iOS) ||
-      (defaultTargetPlatform == TargetPlatform.android)) {
-    FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+  if (!kIsWeb) {
+    if ((defaultTargetPlatform == TargetPlatform.iOS) ||
+        (defaultTargetPlatform == TargetPlatform.android)) {
+      FirebaseMessaging.onBackgroundMessage(
+          _firebaseMessagingBackgroundHandler);
+    } else {
+      NavKey.isRunningWeb = true;
+    }
   } else {
     NavKey.isRunningWeb = true;
   }
 
   // await getPEMKeyCert();
   runApp(Container(
-    color: NavKey.isRunningWeb ? primaryTrans : Colors.white,
-      child: Center(child: SizedBox(width:NavKey.isRunningWeb ? NavKey.widthWeb : double.infinity,child: MyApp()))));
+      color: NavKey.isRunningWeb ? primaryTrans : Colors.white,
+      child: Center(
+          child: SizedBox(
+              width: NavKey.isRunningWeb ? NavKey.widthWeb : double.infinity,
+              child: MyApp()))));
 }
 
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
