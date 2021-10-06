@@ -1,4 +1,4 @@
-import 'package:terkelola/constants/colors.dart';
+import 'package:valburytest/constants/colors.dart';
 import 'package:flutter/material.dart';
 
 class LoadingIndicatorOnly extends StatelessWidget {

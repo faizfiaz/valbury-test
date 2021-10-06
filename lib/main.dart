@@ -7,8 +7,8 @@ import 'package:flutter/services.dart' show rootBundle;
 import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:terkelola/data/local/user_preferences.dart';
-import 'package:terkelola/routes.dart';
+import 'package:valburytest/data/local/user_preferences.dart';
+import 'package:valburytest/routes.dart';
 
 import 'commons/nav_key.dart';
 import 'constants/colors.dart';
@@ -77,7 +77,7 @@ class _MyAppState extends State<MyApp> {
       startRoute = "/login";
     }
     return MaterialApp(
-      title: "Terkelola",
+      title: "valburytest",
       navigatorKey: NavKey.navKey,
       theme: new ThemeData(
           primaryColor: primary,

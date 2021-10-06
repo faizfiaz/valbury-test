@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:terkelola/constants/colors.dart';
-import 'package:terkelola/constants/styles.dart';
+import 'package:valburytest/constants/colors.dart';
+import 'package:valburytest/constants/styles.dart';
 
 class AppBarCustom {
   static Widget buildAppBar(BuildContext context, title) {

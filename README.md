@@ -1,6 +1,4 @@
-# terkelola
-
-Base Flutter 2 MVVM
+# Valbury Test Flutter App
 
 ## Getting Started
 

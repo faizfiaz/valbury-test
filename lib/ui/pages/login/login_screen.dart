@@ -2,17 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
-import 'package:terkelola/commons/base_state_widget.dart';
-import 'package:terkelola/commons/multilanguage.dart';
-import 'package:terkelola/commons/nav_key.dart';
-import 'package:terkelola/commons/screen_utils.dart';
-import 'package:terkelola/constants/colors.dart';
-import 'package:terkelola/constants/images.dart';
-import 'package:terkelola/constants/styles.dart';
-import 'package:terkelola/model/error/error_message.dart';
-import 'package:terkelola/routes.dart';
-import 'package:terkelola/ui/widgets/default_button.dart';
-import 'package:terkelola/ui/widgets/loading_indicator.dart';
+import 'package:valburytest/commons/base_state_widget.dart';
+import 'package:valburytest/commons/multilanguage.dart';
+import 'package:valburytest/commons/nav_key.dart';
+import 'package:valburytest/commons/screen_utils.dart';
+import 'package:valburytest/constants/colors.dart';
+import 'package:valburytest/constants/images.dart';
+import 'package:valburytest/constants/styles.dart';
+import 'package:valburytest/model/error/error_message.dart';
+import 'package:valburytest/routes.dart';
+import 'package:valburytest/ui/widgets/default_button.dart';
+import 'package:valburytest/ui/widgets/loading_indicator.dart';
 
 import 'login_navigator.dart';
 import 'login_view_model.dart';
@@ -70,9 +70,6 @@ class _LoginScreen extends BaseStateWidget<LoginScreen>
                               child: Column(
                                 children: [
                                   buildTitle(),
-                                  SizedBox(
-                                    height: 32,
-                                  ),
                                   buildContentLogin()
                                 ],
                               ),
@@ -86,25 +83,16 @@ class _LoginScreen extends BaseStateWidget<LoginScreen>
                 )));
   }
 
+  //region widget
   Widget buildTitle() {
     return Container(
         width: double.infinity,
         alignment: Alignment.center,
         padding: EdgeInsets.only(left: 12, top: 12),
-        child: SvgPicture.asset(
-          icLogoRed,
+        child: Image.asset(
+          imgCompanyLogo,
           width: ScreenUtils.getScreenWidth(context) - 120,
         ));
-  }
-
-  @override
-  void showError(List<Errors>? error, int? httpCode) {
-    ScreenUtils.showAlertMessage(context, error, httpCode);
-  }
-
-  @override
-  void showMainPage() {
-    navigatePage(homeRN, clearBackStack: true);
   }
 
   Widget buildContentLogin() {
@@ -190,6 +178,22 @@ class _LoginScreen extends BaseStateWidget<LoginScreen>
                       onTap: () => displayForgotPassword(),
                     ),
                   ),
+                ),
+                Container(
+                  alignment: Alignment.center,
+                  width: double.infinity,
+                  child: Material(
+                    color: Colors.white,
+                    child: InkWell(
+                      child: Container(
+                          padding: EdgeInsets.only(top: 16, bottom: 16),
+                          child: Text(
+                            txt("register_text"),
+                            style: TextStyle(color: primary, fontSize: 12),
+                          )),
+                      onTap: () => displayRegisterScreen(),
+                    ),
+                  ),
                 )
               ],
             ),
@@ -216,8 +220,28 @@ class _LoginScreen extends BaseStateWidget<LoginScreen>
     );
   }
 
+  //endregion
+
+  @override
+  void showError(List<Errors>? error, int? httpCode) {
+    ScreenUtils.showAlertMessage(context, error, httpCode);
+  }
+
+  @override
+  void showMainPage() {
+    navigatePage(homeRN, clearBackStack: true);
+  }
+
   displayForgotPassword() {
-    // push(context,
-    //     MaterialPageRoute(builder: (context) => ForgotPasswordScreen()));
+    ScreenUtils.showToastMessage(txt("under_construction"));
+  }
+
+  displayRegisterScreen() {
+    navigatePage(registerRN);
+  }
+
+  @override
+  void showErrorValidCred(String message) {
+    ScreenUtils.showToastMessage(message);
   }
 }

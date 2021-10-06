@@ -1,4 +1,5 @@
-import 'package:terkelola/commons/base_navigator.dart';
+import 'package:valburytest/commons/base_navigator.dart';
 
 abstract class ProfileNavigator extends BaseNavigator {
+  void navigateToLogin();
 }

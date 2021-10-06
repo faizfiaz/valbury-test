@@ -1,4 +1,4 @@
-import 'package:terkelola/commons/base_navigator.dart';
+import 'package:valburytest/commons/base_navigator.dart';
 
 abstract class ServicesNavigator extends BaseNavigator {
 }

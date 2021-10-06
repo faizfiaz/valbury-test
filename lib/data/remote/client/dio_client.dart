@@ -3,11 +3,11 @@ import 'dart:io';
 import 'package:dio/adapter.dart';
 import 'package:dio/dio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:terkelola/commons/multilanguage.dart';
-import 'package:terkelola/commons/nav_key.dart';
-import 'package:terkelola/commons/other_utils.dart';
-import 'package:terkelola/commons/screen_utils.dart';
-import 'package:terkelola/data/local/user_preferences.dart';
+import 'package:valburytest/commons/multilanguage.dart';
+import 'package:valburytest/commons/nav_key.dart';
+import 'package:valburytest/commons/other_utils.dart';
+import 'package:valburytest/commons/screen_utils.dart';
+import 'package:valburytest/data/local/user_preferences.dart';
 
 class DioClient {
   // dio instance

@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
-import 'package:terkelola/commons/base_state_widget.dart';
-import 'package:terkelola/commons/image_utils.dart';
-import 'package:terkelola/constants/colors.dart';
-import 'package:terkelola/constants/styles.dart';
-import 'package:terkelola/ui/widgets/app_bar_custom.dart';
-import 'package:terkelola/ui/widgets/default_button.dart';
-import 'package:terkelola/ui/widgets/loading_indicator.dart';
+import 'package:valburytest/commons/base_state_widget.dart';
+import 'package:valburytest/commons/image_utils.dart';
+import 'package:valburytest/constants/colors.dart';
+import 'package:valburytest/constants/styles.dart';
+import 'package:valburytest/ui/widgets/app_bar_custom.dart';
+import 'package:valburytest/ui/widgets/default_button.dart';
+import 'package:valburytest/ui/widgets/loading_indicator.dart';
 
 import 'notification_list_navigator.dart';
 import 'notification_list_view_model.dart';
@@ -72,6 +72,7 @@ class _NotificationListScreen extends BaseStateWidget<NotificationListScreen>
       child: Column(
         children: [
           Container(
+            width: double.infinity,
             padding: EdgeInsets.all(24),
             color: data.isRead ? white : primaryBackground,
             child: IntrinsicHeight(
@@ -92,15 +93,12 @@ class _NotificationListScreen extends BaseStateWidget<NotificationListScreen>
                         //"${data.name} ${data.title} bulan ${data.month} ${data.message}";
                         RichText(
                             text: TextSpan(
-                                text: "${data.name} ",
+                                text: "",
                                 style: BaseStyle.textBold12,
                                 children: [
                                   TextSpan(
                                       text: "${data.title} ",
                                       style: BaseStyle.textRegular12),
-                                  TextSpan(
-                                      text: "bulan ${data.month} ",
-                                      style: BaseStyle.textBold12),
                                   TextSpan(
                                       text: "${data.message}",
                                       style: BaseStyle.textRegular12)
@@ -148,11 +146,16 @@ class _NotificationListScreen extends BaseStateWidget<NotificationListScreen>
                 context, actionTitle, () {})),
       );
     } else if (action == info) {
-      return Padding(
-        padding: EdgeInsets.only(left: 10),
-        child: Text(
-          actionTitle,
-          style: BaseStyle.textSemiBoldCustom(color: success, fontSize: 14),
+      return Expanded(
+        child: Container(
+          alignment: Alignment.centerRight,
+          child: Padding(
+            padding: EdgeInsets.only(left: 10),
+            child: Text(
+              actionTitle,
+              style: BaseStyle.textSemiBoldCustom(color: success, fontSize: 14),
+            ),
+          ),
         ),
       );
     }

@@ -9,6 +9,7 @@ class BaseStyle {
   static const regularWeight = FontWeight.w400;
   static const semiBoldWeight = FontWeight.w600;
   static const boldWeight = FontWeight.bold;
+
   /// endregion
 
   /// region text light
@@ -20,6 +21,8 @@ class BaseStyle {
   /// endregion
 
   /// region text regular
+  static const textRegular11 =
+  TextStyle(fontWeight: regularWeight, fontSize: 11, color: primaryText);
   static const textRegular12 =
       TextStyle(fontWeight: regularWeight, fontSize: 12, color: primaryText);
   static const textRegular14 =
@@ -28,14 +31,14 @@ class BaseStyle {
       TextStyle(fontWeight: regularWeight, fontSize: 16, color: primaryText);
 
   static const textRegularPrimary14 =
-  TextStyle(fontWeight: regularWeight, fontSize: 14, color: primary);
+      TextStyle(fontWeight: regularWeight, fontSize: 14, color: primary);
   static const textRegularPrimary16 =
       TextStyle(fontWeight: regularWeight, fontSize: 16, color: primary);
 
-  static const textSecondaryRegular12 = TextStyle(
-      fontWeight: regularWeight, fontSize: 12, color: secondaryText);
-  static const textSecondaryRegular14 = TextStyle(
-      fontWeight: regularWeight, fontSize: 14, color: secondaryText);
+  static const textSecondaryRegular12 =
+      TextStyle(fontWeight: regularWeight, fontSize: 12, color: secondaryText);
+  static const textSecondaryRegular14 =
+      TextStyle(fontWeight: regularWeight, fontSize: 14, color: secondaryText);
 
   static const textRegularWhite12 =
       TextStyle(fontWeight: regularWeight, fontSize: 12, color: white);
@@ -55,11 +58,17 @@ class BaseStyle {
         fontWeight: semiBoldWeight, fontSize: fontSize, color: color);
   }
 
+  static const textSemiBold12 =
+      TextStyle(fontWeight: semiBoldWeight, fontSize: 12, color: primaryText);
+  static const textSemiBold14 =
+      TextStyle(fontWeight: semiBoldWeight, fontSize: 14, color: primaryText);
   static const textSemiBold16 =
       TextStyle(fontWeight: semiBoldWeight, fontSize: 16, color: primaryText);
   static const textSemiBold18 =
       TextStyle(fontWeight: semiBoldWeight, fontSize: 18, color: primaryText);
 
+  static const textSemiBoldPrimary12 =
+      TextStyle(fontWeight: semiBoldWeight, fontSize: 12, color: primary);
   static const textSemiBoldPrimary16 =
       TextStyle(fontWeight: semiBoldWeight, fontSize: 16, color: primary);
 

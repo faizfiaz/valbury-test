@@ -1,0 +1,9 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="id.co.valburytest.app">
+
+    <application
+        android:label="Dev-Valbury Test"
+        tools:replace="android:label">
+    </application>
+</manifest>

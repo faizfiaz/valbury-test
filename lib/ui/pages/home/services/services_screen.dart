@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
-import 'package:terkelola/commons/base_state_widget.dart';
-import 'package:terkelola/constants/colors.dart';
-import 'package:terkelola/constants/images.dart';
-import 'package:terkelola/constants/styles.dart';
-import 'package:terkelola/model/entity/services_menu.dart';
-import 'package:terkelola/ui/widgets/loading_indicator.dart';
+import 'package:valburytest/commons/base_state_widget.dart';
+import 'package:valburytest/constants/colors.dart';
+import 'package:valburytest/constants/images.dart';
+import 'package:valburytest/constants/styles.dart';
+import 'package:valburytest/model/entity/services_menu.dart';
+import 'package:valburytest/ui/widgets/loading_indicator.dart';
 
 import 'services_navigator.dart';
 import 'services_view_model.dart';

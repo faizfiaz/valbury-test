@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>374394220781-d5lpcdalladkriab7c4t0ins791h8d2o.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.374394220781-d5lpcdalladkriab7c4t0ins791h8d2o</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>374394220781-210u40dq0kdoksaad5ae7lstij2lcnv0.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyB6Pl_lRZJzwJeXnGeRVlPK8Vzh-FI3Hmk</string>
+	<key>GCM_SENDER_ID</key>
+	<string>374394220781</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>id.co.valburytest.app</string>
+	<key>PROJECT_ID</key>
+	<string>valbury-test</string>
+	<key>STORAGE_BUCKET</key>
+	<string>valbury-test.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:374394220781:ios:c8f911435ff27b7c1bdce4</string>
+</dict>
+</plist>

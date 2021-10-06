@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
-import 'package:terkelola/commons/base_state_widget.dart';
-import 'package:terkelola/constants/colors.dart';
-import 'package:terkelola/constants/images.dart';
-import 'package:terkelola/constants/styles.dart';
-import 'package:terkelola/ui/widgets/loading_indicator.dart';
+import 'package:valburytest/commons/base_state_widget.dart';
+import 'package:valburytest/commons/multilanguage.dart';
+import 'package:valburytest/constants/colors.dart';
+import 'package:valburytest/constants/images.dart';
+import 'package:valburytest/constants/styles.dart';
+import 'package:valburytest/routes.dart';
+import 'package:valburytest/ui/widgets/loading_indicator.dart';
 
 import 'profile_navigator.dart';
 import 'profile_view_model.dart';
@@ -108,7 +110,7 @@ class _ProfileScreen extends BaseStateWidget<ProfileScreen>
                       height: 8,
                     ),
                     Text(
-                      "Perumahan Permai Indah",
+                      "Junior Trader",
                       style: BaseStyle.textLight14,
                     ),
                   ],
@@ -156,7 +158,8 @@ class _ProfileScreen extends BaseStateWidget<ProfileScreen>
         ),
         menuItem("Panduan", icGuides, () => openAccountSetting()),
         menuItem("Chat", icChat, () => openAccountSetting()),
-        menuItem("Call Center", icCallCenter, () => openAccountSetting())
+        menuItem("Call Center", icCallCenter, () => openAccountSetting()),
+        buildChangeLanguageMenu()
       ],
     );
   }
@@ -255,7 +258,7 @@ class _ProfileScreen extends BaseStateWidget<ProfileScreen>
 
   Widget logoutWidget(){
     return InkWell(
-      onTap: () => print("Version Menu"),
+      onTap: () => _viewModel.doLogout(),
       child: Container(
         width: double.infinity,
         padding: EdgeInsets.only(left: 24, right: 24, top: 14, bottom: 14),
@@ -277,5 +280,42 @@ class _ProfileScreen extends BaseStateWidget<ProfileScreen>
         ),
       ),
     );
+  }
+
+  @override
+  void navigateToLogin() {
+    navigatePage(loginRN, clearBackStack: true);
+  }
+
+  Widget buildChangeLanguageMenu() {
+    return InkWell(
+      onTap: () => _viewModel.changeLanguage(context),
+      child: Container(
+        width: double.infinity,
+        padding: EdgeInsets.only(left: 24, right: 24, top: 14, bottom: 14),
+        child: Row(
+          children: [
+            SvgPicture.asset(
+              icLanguage,
+              width: 24,
+              height: 24,
+            ),
+            SizedBox(
+              width: 28,
+            ),
+            Text(
+              "Ganti Bahasa",
+              style: BaseStyle.textRegular14,
+            ),
+            Expanded(child: SizedBox()),
+            Text(
+              txt("current_language"),
+              style: BaseStyle.textSemiBoldPrimary16,
+            ),
+          ],
+        ),
+      ),
+    );
+
   }
 }

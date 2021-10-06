@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:terkelola/commons/base_view_model.dart';
-import 'package:terkelola/commons/email_validator.dart';
-import 'package:terkelola/data/local/user_preferences.dart';
-import 'package:terkelola/repository/user_repository.dart';
-import 'package:terkelola/usecases/user/user_usecase.dart';
+import 'package:valburytest/commons/base_view_model.dart';
+import 'package:valburytest/commons/email_validator.dart';
+import 'package:valburytest/commons/multilanguage.dart';
+import 'package:valburytest/data/local/user_preferences.dart';
+import 'package:valburytest/repository/user_repository.dart';
+import 'package:valburytest/usecases/user/user_usecase.dart';
 
 import 'login_navigator.dart';
 
@@ -28,7 +29,7 @@ class LoginViewModel extends BaseViewModel<LoginNavigator> {
   }
 
   void checkLengthPassword() {
-    errorPassword = controllerPassword.text.length < 4 ? true : false;
+    errorPassword = controllerPassword.text.length < 6 ? true : false;
     notifyListeners();
   }
 
@@ -36,7 +37,6 @@ class LoginViewModel extends BaseViewModel<LoginNavigator> {
     showLoading(true);
     UserPreferences userPreferences = UserPreferences();
     userPreferences.getToken().then((value) {
-      print(value);
       if (value.isNotEmpty) {
         getView()?.showMainPage();
       }
@@ -45,18 +45,26 @@ class LoginViewModel extends BaseViewModel<LoginNavigator> {
   }
 
   doLogin() async {
-    showLoading(true);
-    await _usecase
-        .login(controllerEmail.text, controllerPassword.text)
-        .then((value) {
-      showLoading(false);
-      if (value.values.first != null) {
-        getView()?.showError(
-            value.values.first!.errors, value.values.first!.httpCode);
-      } else {
-        getView()?.showMainPage();
-      }
-      // ignore: return_of_invalid_type_from_catch_error
-    }).catchError((errorValue) => print(errorValue));
+    checkValidEmail();
+    checkLengthPassword();
+    if (!errorEmail && !errorPassword) {
+      showLoading(true);
+      await _usecase
+          .login(controllerEmail.text, controllerPassword.text)
+          .then((value) {
+        showLoading(false);
+        if (value.values.first != null) {
+          getView()?.showError(
+              value.values.first!.errors, value.values.first!.httpCode);
+        } else {
+          if (value.keys.first) {
+            getView()?.showMainPage();
+          } else {
+            getView()?.showErrorValidCred(txt("wrong_cred"));
+          }
+        }
+        // ignore: return_of_invalid_type_from_catch_error
+      }).catchError((errorValue) => print(errorValue));
+    }
   }
 }

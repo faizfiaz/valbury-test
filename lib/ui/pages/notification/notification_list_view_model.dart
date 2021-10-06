@@ -1,8 +1,8 @@
-import 'package:terkelola/commons/base_view_model.dart';
-import 'package:terkelola/constants/images.dart';
-import 'package:terkelola/model/entity/notification_item.dart';
-import 'package:terkelola/repository/user_repository.dart';
-import 'package:terkelola/usecases/user/user_usecase.dart';
+import 'package:valburytest/commons/base_view_model.dart';
+import 'package:valburytest/constants/images.dart';
+import 'package:valburytest/model/entity/notification_item.dart';
+import 'package:valburytest/repository/user_repository.dart';
+import 'package:valburytest/usecases/user/user_usecase.dart';
 
 import 'notification_list_navigator.dart';
 
@@ -12,44 +12,30 @@ class NotificationListViewModel
 
   List<NotificationItem> data = [
     NotificationItem(
-        name: "Pengelola",
         picture: dummyUser,
-        month: "Februari 2020",
-        title: "mengirimkan total iuran",
-        message: "untuk kamu",
+        title: "Promo Bulan Oktober 2021",
+        message: "Topup sekarang dan dapatkan promonya",
         isRead: false,
         action: "see_detail",
         actionTitle: "Lihat",
     date: "1 Jam yang lalu"),
     NotificationItem(
-        name: "Pak Faiz",
         picture: dummyUser2,
-        month: "Januari 2020",
-        title: "Pembayaran iuran Anda telah kami terima untuk",
+        title: "Topup anda sudah berhasil",
         message: "",
         isRead: false,
         action: "info",
-        actionTitle: "Lunas",
+        actionTitle: "Sukses Topup",
         date: "12 Jam yang lalu"),
     NotificationItem(
-        name: "Pak Faiz",
         picture: icClockNotification,
-        month: "Januari 2020",
-        title: "Hari ini iuran",
+        title: "Maintenance tanggal 12 Juli 2021",
         message:
-            "telah jatuh Tempo, yuk bayar melalui pilihan pembayaran yang tersedia",
+            "Mohon untuk tidak menggunakan Aplikasi pada jam 23:30 - 23:59",
         isRead: true,
-        action: "pay",
-        actionTitle: "Bayar",
-        date: "1 Hari yang lalu"),
-    NotificationItem(
-        name: "Pengelola",
-        picture: dummyUser,
-        month: "Januari 2020",
-        title: "mengirimkan total iuran",
-        message: "untuk kamu",
-        isRead: true,
-        date: "1 Bulan yang lalu")
+        action: "see_detail",
+        actionTitle: "Lihat",
+        date: "1 Hari yang lalu")
   ];
 
   NotificationListViewModel() {
@@ -57,7 +43,7 @@ class NotificationListViewModel
   }
 
   String buildNotificationText(NotificationItem data) {
-    return "${data.name} ${data.title} bulan ${data.month} ${data.message}";
+    return "${data.title} ${data.message}";
   }
 
   markAllRead() {

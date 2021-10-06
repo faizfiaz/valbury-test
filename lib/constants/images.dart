@@ -2,20 +2,24 @@ const pathImage = "assets/images/";
 const pathIcons = "assets/icons/";
 
 ///region images
-const String imageIntro1 = pathImage + "intro_1.svg";
-const String imageIntro2 = pathImage + "intro_2.svg";
-const String imageIntro3 = pathImage + "intro_3.svg";
 const String bgHomeOval = pathImage + "bg_home_oval.svg";
 const String bgHomeOvalWeb = pathImage + "bg_home_oval_web.svg";
 const String dummyUser = pathImage + "dummy_user.png";
 const String dummyUser2 = pathImage + "dummy_user_2.png";
 const String dummyUser3 = pathImage + "dummy_user_3.jpeg";
+const String imgCompanyLogo = pathImage + "img_company_logo.jpg";
+const String imgRsEka = pathImage + "rs_eka.jpeg";
+const String imgRsSiloam = pathImage + "rs_siloam.jpeg";
+const String imgRsCipto = pathImage + "rs_cipto.jpeg";
+const String banner1 = pathImage + "banner_health.jpeg";
+const String banner2 = pathImage + "banner_insurance.png";
+const String banner3 = pathImage + "banner_rs_dummy.jpeg";
+const String klinikMedisa = pathImage + "klinik_medisa.jpeg";
+const String klinikKayu = pathImage + "klinik_kayu.jpeg";
+const String klinikDepokTua = pathImage + "klinik_depok_tua.jpeg";
 ///endregion
 
 ///region icons
-const String icLogo = pathIcons + "ic_logo.svg";
-const String icLogoBlack = pathIcons + "ic_logo_black.svg";
-const String icLogoRed = pathIcons + "ic_logo_red.svg";
 const String icFacebook = pathIcons + "ic_facebook.svg";
 const String icGoogle = pathIcons + "ic_google_plus.svg";
 const String icNotificationHome = pathIcons + "ic_notification_home.svg";
@@ -59,4 +63,5 @@ const String icMovePermit = pathIcons + "ic_move_permit.svg";
  const String icCallCenter = pathIcons + "ic_call_center.svg";
  const String icInfo = pathIcons + "ic_info.svg";
  const String icLogout = pathIcons + "ic_logout.svg";
+ const String icLanguage = pathIcons + "ic_language.svg";
  ///endregion
