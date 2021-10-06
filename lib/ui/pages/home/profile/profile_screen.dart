@@ -75,7 +75,7 @@ class _ProfileScreen extends BaseStateWidget<ProfileScreen>
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            "Profil",
+            txt("profile"),
             style: BaseStyle.textBold18,
           ),
           SizedBox(
@@ -134,13 +134,13 @@ class _ProfileScreen extends BaseStateWidget<ProfileScreen>
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        titleWidget("Informasi"),
+        titleWidget(txt("information")),
         SizedBox(
           height: 8,
         ),
-        menuItem("Akun", icProfile, () => openAccountSetting()),
-        menuItem("Atur Notifikasi", icRemind, () => openAccountSetting()),
-        menuItem("Ganti Password", icPassword, () => openAccountSetting())
+        menuItem(txt("account"), icProfile, () => openAccountSetting()),
+        menuItem(txt("setup_notification"), icRemind, () => openAccountSetting()),
+        menuItem(txt("change_password"), icPassword, () => openAccountSetting())
       ],
     );
   }
@@ -152,11 +152,11 @@ class _ProfileScreen extends BaseStateWidget<ProfileScreen>
         SizedBox(
           height: 20,
         ),
-        titleWidget("Bantuan"),
+        titleWidget(txt("help")),
         SizedBox(
           height: 8,
         ),
-        menuItem("Panduan", icGuides, () => openAccountSetting()),
+        menuItem(txt("guide"), icGuides, () => openAccountSetting()),
         menuItem("Chat", icChat, () => openAccountSetting()),
         menuItem("Call Center", icCallCenter, () => openAccountSetting()),
         buildChangeLanguageMenu()
@@ -171,7 +171,7 @@ class _ProfileScreen extends BaseStateWidget<ProfileScreen>
         SizedBox(
           height: 20,
         ),
-        titleWidget("Tentang"),
+        titleWidget(txt("about")),
         SizedBox(
           height: 8,
         ),
@@ -244,7 +244,7 @@ class _ProfileScreen extends BaseStateWidget<ProfileScreen>
               width: 28,
             ),
             Text(
-              "Versi Apps",
+              txt("version_apps"),
               style: BaseStyle.textRegular14,
             ),
             Expanded(child: SizedBox()),
@@ -304,7 +304,7 @@ class _ProfileScreen extends BaseStateWidget<ProfileScreen>
               width: 28,
             ),
             Text(
-              "Ganti Bahasa",
+              txt("change_language"),
               style: BaseStyle.textRegular14,
             ),
             Expanded(child: SizedBox()),

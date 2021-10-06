@@ -12,5 +12,21 @@
   "login_text": "Already have account? Click Here",
   "phone":"Phone Number",
   "phone_not_valid":"Phone number is not valid",
-  "wrong_cred": "The email or password you entered does not match"
+  "wrong_cred": "The email or password you entered does not match",
+  "chart": "Charts",
+  "hospital": "Hospitals",
+  "see_all": "See All",
+  "clinic": "Clinics",
+  "all": "All",
+  "nearest": "Nearest",
+  "profile":"Profile",
+  "information": "Information",
+  "account": "Account",
+  "setup_notification": "Setup Notifications",
+  "change_password": "Change Password",
+  "help": "Help",
+  "guide": "Guides",
+  "about": "About",
+  "version_apps": "Apps Version",
+  "change_language": "Change Language"
 }

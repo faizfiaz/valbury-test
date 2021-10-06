@@ -1,12 +1,12 @@
 import 'dart:async';
 
 import 'package:valburytest/commons/base_view_model.dart';
+import 'package:valburytest/commons/multilanguage.dart';
 import 'package:valburytest/constants/images.dart';
 import 'package:valburytest/model/entity/banners.dart';
 import 'package:valburytest/model/entity/chips.dart';
 import 'package:valburytest/model/entity/rs_clinic.dart';
 import 'package:valburytest/repository/user_repository.dart';
-import 'package:valburytest/ui/pages/home/dashboard/widget/rs_clinic_widget.dart';
 import 'package:valburytest/usecases/user/user_usecase.dart';
 
 import 'dashboard_navigator.dart';
@@ -35,10 +35,10 @@ class DashboardViewModel extends BaseViewModel<DashboardNavigator> {
 
   void populateRsChip() {
     List<Chips> dummyChips = [
-      Chips(1, "Semua", true),
+      Chips(1, txt("all"), true),
       Chips(2, "BPJS"),
       Chips(3, "Partner"),
-      Chips(4, "Terdekat")
+      Chips(4, txt("nearest"))
     ];
     getView()?.populateRsChips(dummyChips);
     Timer(Duration(seconds: 2), () => reloadRsList(true, dummyChips[0].id));
@@ -46,10 +46,10 @@ class DashboardViewModel extends BaseViewModel<DashboardNavigator> {
 
   void populateClinicChip() {
     List<Chips> dummyChips = [
-      Chips(1, "Semua", true),
+      Chips(1, txt("all"), true),
       Chips(2, "BPJS"),
       Chips(3, "Partner"),
-      Chips(4, "Terdekat")
+      Chips(4, txt("nearest"))
     ];
     getView()?.populateClinicChips(dummyChips);
     Timer(Duration(seconds: 2), () => reloadClinicList(true, dummyChips[0].id));

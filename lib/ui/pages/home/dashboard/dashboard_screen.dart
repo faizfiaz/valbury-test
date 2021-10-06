@@ -18,14 +18,12 @@ import 'package:valburytest/ui/widgets/circle_badge_number.dart';
 import 'package:valburytest/ui/widgets/colored_safe_area.dart';
 import 'package:valburytest/ui/widgets/loading_indicator.dart';
 
-import '../home_listener.dart';
 import 'dashboard_navigator.dart';
 import 'dashboard_view_model.dart';
 
 class DashboardScreen extends StatefulWidget {
-  HomeListener homeListener;
 
-  DashboardScreen(this.homeListener);
+  DashboardScreen();
 
   @override
   State<StatefulWidget> createState() {
@@ -180,7 +178,7 @@ class _DashboardScreen extends BaseStateWidget<DashboardScreen>
             controller: tabController,
             tabs: [
               Tab(text: "Dashboard"),
-              Tab(text: "Grafik"),
+              Tab(text: txt("chart")),
             ],
           ),
         ],
@@ -215,9 +213,9 @@ class _DashboardScreen extends BaseStateWidget<DashboardScreen>
         children: [
           Row(
             children: [
-              titleSection("Rumah Sakit"),
+              titleSection(txt("hospital")),
               Expanded(child: SizedBox()),
-              seeAllSection("Lihat Semua", () => underConstructionFunction())
+              seeAllSection(txt("see_all"), () => underConstructionFunction())
             ],
           ),
           SizedBox(
@@ -240,9 +238,9 @@ class _DashboardScreen extends BaseStateWidget<DashboardScreen>
         children: [
           Row(
             children: [
-              titleSection("Klinik"),
+              titleSection(txt("clinic")),
               Expanded(child: SizedBox()),
-              seeAllSection("Lihat Semua", () => underConstructionFunction())
+              seeAllSection(txt("see_all"), () => underConstructionFunction())
             ],
           ),
           SizedBox(
@@ -286,20 +284,6 @@ class _DashboardScreen extends BaseStateWidget<DashboardScreen>
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-        ],
-      ),
-    );
-  }
-
-  Widget valburySection() {
-    return Container(
-      width: double.infinity,
-      padding: EdgeInsets.only(top: 16),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          titleSection("Lebih dekat dengan Valbury"),
-          // BannersWidgeget(data: [], isLoading: true)
         ],
       ),
     );

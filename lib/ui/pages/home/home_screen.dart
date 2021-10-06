@@ -6,9 +6,7 @@ import 'package:valburytest/constants/colors.dart';
 import 'package:valburytest/constants/images.dart';
 import 'package:valburytest/ui/pages/empty/empty_screen.dart';
 import 'package:valburytest/ui/pages/home/dashboard/dashboard_screen.dart';
-import 'package:valburytest/ui/pages/home/home_listener.dart';
 import 'package:valburytest/ui/pages/home/profile/profile_screen.dart';
-import 'package:valburytest/ui/pages/home/services/services_screen.dart';
 
 import 'home_navigator.dart';
 import 'home_view_model.dart';
@@ -22,18 +20,17 @@ class HomeScreen extends StatefulWidget {
   }
 }
 
-class _HomeScreen extends BaseStateWidget<HomeScreen> implements HomeNavigator, HomeListener {
+class _HomeScreen extends BaseStateWidget<HomeScreen> implements HomeNavigator {
   late HomeViewModel _viewModel;
 
   final List<Widget> screens = [];
-  PageController _pageController = PageController();
   int _indexPage = 0;
 
   @override
   void initState() {
     super.initState();
-    screens.add(DashboardScreen(this));
-    screens.add(ServicesScreen());
+    screens.add(DashboardScreen());
+    screens.add(EmptyScreen());
     screens.add(EmptyScreen());
     screens.add(ProfileScreen());
 
@@ -42,7 +39,6 @@ class _HomeScreen extends BaseStateWidget<HomeScreen> implements HomeNavigator, 
 
   @override
   void dispose() {
-    _pageController.dispose();
     super.dispose();
   }
 
@@ -55,13 +51,11 @@ class _HomeScreen extends BaseStateWidget<HomeScreen> implements HomeNavigator, 
           builder: (context, viewModel, _) => Scaffold(
             backgroundColor: white,
             bottomNavigationBar: buildBottomBar(),
-            body: PageView(
-              controller: _pageController,
-              onPageChanged: (index) {
-                setState(() => _indexPage = index);
-              },
-              children: screens
-            ),
+            body: IndexedStack(
+              index: _indexPage,
+              children:
+              List.unmodifiable(screens)
+            )
           ),
         ));
   }
@@ -75,7 +69,10 @@ class _HomeScreen extends BaseStateWidget<HomeScreen> implements HomeNavigator, 
       type: BottomNavigationBarType.fixed,
       currentIndex: _indexPage,
       onTap: (index) {
-        scrollPageNow(index);
+        setState(() {
+          _indexPage = index;
+        });
+        // scrollPageNow(index);
       },
       items: [
         BottomNavigationBarItem(
@@ -108,18 +105,5 @@ class _HomeScreen extends BaseStateWidget<HomeScreen> implements HomeNavigator, 
             label: "Akun"),
       ],
     );
-  }
-
-  @override
-  onClickOthersPPOB() {
-   scrollPageNow(1);
-  }
-
-  void scrollPageNow(int index) {
-    setState(() {
-      _indexPage = index;
-      _pageController.animateToPage(index,
-          duration: Duration(milliseconds: 500), curve: Curves.easeInBack);
-    });
   }
 }
