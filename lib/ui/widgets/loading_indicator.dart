@@ -1,5 +1,5 @@
-import 'package:terkelola/commons/multilanguage.dart';
-import 'package:terkelola/constants/colors.dart';
+import 'package:valburytest/commons/multilanguage.dart';
+import 'package:valburytest/constants/colors.dart';
 import 'package:flutter/material.dart';
 
 class LoadingIndicator extends StatelessWidget {

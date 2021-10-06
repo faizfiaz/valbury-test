@@ -5,4 +5,5 @@ class NavKey {
   static var isInLogin = false;
   static var pemKey = "";
   static var isRunningWeb = false;
+  static double widthWeb = 416;
 }

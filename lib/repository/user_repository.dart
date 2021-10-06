@@ -1,6 +1,6 @@
-import 'package:terkelola/data/remote/client/dio_client.dart';
-import 'package:terkelola/data/remote/endpoints/user_endpoints.dart';
-import 'package:terkelola/model/response/response_login.dart';
+import 'package:valburytest/data/remote/client/dio_client.dart';
+import 'package:valburytest/data/remote/endpoints/user_endpoints.dart';
+import 'package:valburytest/model/response/response_login.dart';
 
 import 'base_repository.dart';
 

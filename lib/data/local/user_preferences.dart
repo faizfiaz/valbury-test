@@ -1,7 +1,10 @@
+import 'dart:convert';
 
 import 'package:encrypt/encrypt.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:valburytest/commons/nav_key.dart';
+import 'package:valburytest/model/request/request_user.dart';
 
 class UserPreferences {
   static const String user_key = "userData";
@@ -18,23 +21,47 @@ class UserPreferences {
 
     final _e = Encrypter(AES(key));
     final _edr = _e.encrypt(token, iv: iv);
-    final secureStorage = FlutterSecureStorage();
-    await secureStorage.write(key: token_key, value: _edr.base64);
-    return true;
+
+    if (NavKey.isRunningWeb) {
+      final SharedPreferences preferences =
+          await SharedPreferences.getInstance();
+      preferences.setString(token_key, _edr.base64);
+      return true;
+    } else {
+      final secureStorage = FlutterSecureStorage();
+      await secureStorage.write(key: token_key, value: _edr.base64);
+      return true;
+    }
   }
 
   Future<String> getToken() async {
-    final secureStorage = FlutterSecureStorage();
-    String? data = await secureStorage.read(key: token_key);
-    if (data != null) {
-      final key = Key.fromUtf8(_hk);
-      final iv = IV.fromLength(16);
+    if (NavKey.isRunningWeb) {
+      final SharedPreferences preferences =
+          await SharedPreferences.getInstance();
+      String? data = preferences.getString(token_key);
+      if (data != null) {
+        final key = Key.fromUtf8(_hk);
+        final iv = IV.fromLength(16);
 
-      final _e = Encrypter(AES(key));
-      final _dctr = _e.decrypt64(data, iv: iv);
-      return Future.value(_dctr);
+        final _e = Encrypter(AES(key));
+        final _dctr = _e.decrypt64(data, iv: iv);
+        return Future.value(_dctr);
+      } else {
+        return Future.value("");
+      }
     } else {
-      return Future.value("");
+      final secureStorage = FlutterSecureStorage();
+      String? data = await secureStorage.read(key: token_key);
+      if (data != null) {
+        final key = Key.fromUtf8(_hk);
+        final iv = IV.fromLength(16);
+
+        final _e = Encrypter(AES(key));
+        final _dctr = _e.decrypt64(data, iv: iv);
+        return Future.value(_dctr);
+      } else {
+        return Future.value("");
+      }
     }
   }
 
@@ -68,12 +95,38 @@ class UserPreferences {
     }
   }
 
+  Future<bool> setDataUser(RequestUser requestUser) async {
+    final secureStorage = FlutterSecureStorage();
+    String userData = json.encode(requestUser.toJson());
+    final key = Key.fromUtf8(_hk);
+    final iv = IV.fromLength(16);
+
+    final _e = Encrypter(AES(key));
+    final _edr = _e.encrypt(userData, iv: iv);
+    await secureStorage.write(key: user_key, value: _edr.base64);
+    return true;
+  }
+
+  Future<RequestUser?> getDataUser() async {
+    final secureStorage = FlutterSecureStorage();
+    String? data = await secureStorage.read(key: user_key);
+    if (data != null) {
+      final key = Key.fromUtf8(_hk);
+      final iv = IV.fromLength(16);
+
+      final _e = Encrypter(AES(key));
+      final _dctr = _e.decrypt64(data, iv: iv);
+      Map userMap = json.decode(_dctr);
+      return RequestUser.fromJson(userMap);
+    } else {
+      return Future.value(null);
+    }
+  }
+
   Future<bool> clearData() async {
     final SharedPreferences preferences = await SharedPreferences.getInstance();
     final secureStorage = FlutterSecureStorage();
-    preferences.remove(user_key);
-    preferences.remove(token_key);
-    await secureStorage.deleteAll();
+    await secureStorage.delete(key: token_key);
     return true;
   }
 }

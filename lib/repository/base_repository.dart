@@ -1,6 +1,6 @@
 
 import 'package:dio/dio.dart';
-import 'package:terkelola/data/remote/client/dio_client.dart';
+import 'package:valburytest/data/remote/client/dio_client.dart';
 
 abstract class BaseRepository{
 

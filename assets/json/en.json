@@ -3,7 +3,14 @@
   "forgot_password": "Forgot password?",
   "login": "Login",
   "login_with": "Login With",
-  "signup_message": "Don't Have Account?",
-  "signup_here": "Register Here",
-  "loading_text": "Please wait..."
+  "register": "Register",
+  "loading_text": "Please wait...",
+  "under_construction" : "Feature is under construction",
+  "email_not_valid": "Email is not valid",
+  "password_minimum_6": "Password minimum 6 character",
+  "register_text": "Need Account? Click Here",
+  "login_text": "Already have account? Click Here",
+  "phone":"Phone Number",
+  "phone_not_valid":"Phone number is not valid",
+  "wrong_cred": "The email or password you entered does not match"
 }

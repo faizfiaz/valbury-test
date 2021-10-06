@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
-import 'package:terkelola/commons/base_state_widget.dart';
-import 'package:terkelola/constants/colors.dart';
-import 'package:terkelola/constants/images.dart';
-import 'package:terkelola/ui/pages/empty/empty_screen.dart';
-import 'package:terkelola/ui/pages/home/dashboard/dashboard_screen.dart';
+import 'package:valburytest/commons/base_state_widget.dart';
+import 'package:valburytest/constants/colors.dart';
+import 'package:valburytest/constants/images.dart';
+import 'package:valburytest/ui/pages/empty/empty_screen.dart';
+import 'package:valburytest/ui/pages/home/dashboard/dashboard_screen.dart';
+import 'package:valburytest/ui/pages/home/home_listener.dart';
+import 'package:valburytest/ui/pages/home/profile/profile_screen.dart';
+import 'package:valburytest/ui/pages/home/services/services_screen.dart';
 
 import 'home_navigator.dart';
 import 'home_view_model.dart';
@@ -19,7 +22,7 @@ class HomeScreen extends StatefulWidget {
   }
 }
 
-class _HomeScreen extends BaseStateWidget<HomeScreen> implements HomeNavigator {
+class _HomeScreen extends BaseStateWidget<HomeScreen> implements HomeNavigator, HomeListener {
   late HomeViewModel _viewModel;
 
   final List<Widget> screens = [];
@@ -29,10 +32,10 @@ class _HomeScreen extends BaseStateWidget<HomeScreen> implements HomeNavigator {
   @override
   void initState() {
     super.initState();
-    screens.add(DashboardScreen());
+    screens.add(DashboardScreen(this));
+    screens.add(ServicesScreen());
     screens.add(EmptyScreen());
-    screens.add(EmptyScreen());
-    screens.add(EmptyScreen());
+    screens.add(ProfileScreen());
 
     _viewModel = HomeViewModel().setView(this) as HomeViewModel;
   }
@@ -72,11 +75,7 @@ class _HomeScreen extends BaseStateWidget<HomeScreen> implements HomeNavigator {
       type: BottomNavigationBarType.fixed,
       currentIndex: _indexPage,
       onTap: (index) {
-        setState(() {
-          _indexPage = index;
-          _pageController.animateToPage(index,
-              duration: Duration(milliseconds: 500), curve: Curves.easeInBack);
-        });
+        scrollPageNow(index);
       },
       items: [
         BottomNavigationBarItem(
@@ -85,29 +84,42 @@ class _HomeScreen extends BaseStateWidget<HomeScreen> implements HomeNavigator {
               opacity: opacityInActive,
             ),
             activeIcon: SvgPicture.asset(icHome),
-            label: ""),
+            label: "Beranda"),
         BottomNavigationBarItem(
             icon: Opacity(
               child: SvgPicture.asset(icPPOB),
               opacity: opacityInActive,
             ),
             activeIcon: SvgPicture.asset(icPPOB),
-            label: ""),
+            label: "PPOB"),
         BottomNavigationBarItem(
             icon: Opacity(
               child: SvgPicture.asset(icHistory),
               opacity: opacityInActive,
             ),
             activeIcon: SvgPicture.asset(icHistory),
-            label: ""),
+            label: "Riwayat Transaksi"),
         BottomNavigationBarItem(
             icon: Opacity(
               child: SvgPicture.asset(icProfile),
               opacity: opacityInActive,
             ),
             activeIcon: SvgPicture.asset(icProfile),
-            label: ""),
+            label: "Akun"),
       ],
     );
+  }
+
+  @override
+  onClickOthersPPOB() {
+   scrollPageNow(1);
+  }
+
+  void scrollPageNow(int index) {
+    setState(() {
+      _indexPage = index;
+      _pageController.animateToPage(index,
+          duration: Duration(milliseconds: 500), curve: Curves.easeInBack);
+    });
   }
 }

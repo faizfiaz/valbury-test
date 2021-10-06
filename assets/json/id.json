@@ -3,7 +3,14 @@
   "forgot_password": "Lupa Kata Sandi?",
   "login": "Masuk",
   "login_with": "Masuk Dengan",
-  "signup_message": "Belum memiliki Akun?",
-  "signup_here": "Daftar Disini",
-  "loading_text": "Mohon tunggu..."
+  "register": "Daftar",
+  "loading_text": "Mohon tunggu...",
+  "under_construction" : "Feature dalam pengembangan",
+  "email_not_valid": "Email tidak valid",
+  "password_minimum_6": "Password minimal 6 karakter",
+  "register_text": "Butuh Akun? Klik disini",
+  "login_text": "Sudah memiliki akun? Klik disini",
+  "phone":"Nomor Telepon",
+  "phone_not_valid":"Nomor Telepon tidak valid",
+  "wrong_cred": "Email atau password yang anda masukkan tidak sesuai"
 }

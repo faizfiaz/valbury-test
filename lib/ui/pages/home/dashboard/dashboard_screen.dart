@@ -1,22 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
-import 'package:terkelola/commons/base_state_widget.dart';
-import 'package:terkelola/constants/colors.dart';
-import 'package:terkelola/constants/images.dart';
-import 'package:terkelola/constants/styles.dart';
-import 'package:terkelola/routes.dart';
-import 'package:terkelola/ui/pages/home/dashboard/widget/news_list_widget.dart';
-import 'package:terkelola/ui/pages/home/dashboard/widget/promo_list_widget.dart';
-import 'package:terkelola/ui/widgets/circle_badge_number.dart';
-import 'package:terkelola/ui/widgets/colored_safe_area.dart';
-import 'package:terkelola/ui/widgets/loading_indicator.dart';
+import 'package:valburytest/commons/base_state_widget.dart';
+import 'package:valburytest/commons/multilanguage.dart';
+import 'package:valburytest/commons/screen_utils.dart';
+import 'package:valburytest/constants/colors.dart';
+import 'package:valburytest/constants/images.dart';
+import 'package:valburytest/constants/styles.dart';
+import 'package:valburytest/model/entity/banners.dart';
+import 'package:valburytest/model/entity/chips.dart';
+import 'package:valburytest/model/entity/rs_clinic.dart';
+import 'package:valburytest/routes.dart';
+import 'package:valburytest/ui/pages/home/dashboard/widget/banners_widget.dart';
+import 'package:valburytest/ui/pages/home/dashboard/widget/chips_widget.dart';
+import 'package:valburytest/ui/pages/home/dashboard/widget/rs_clinic_widget.dart';
+import 'package:valburytest/ui/widgets/circle_badge_number.dart';
+import 'package:valburytest/ui/widgets/colored_safe_area.dart';
+import 'package:valburytest/ui/widgets/loading_indicator.dart';
 
+import '../home_listener.dart';
 import 'dashboard_navigator.dart';
 import 'dashboard_view_model.dart';
 
 class DashboardScreen extends StatefulWidget {
-  DashboardScreen();
+  HomeListener homeListener;
+
+  DashboardScreen(this.homeListener);
 
   @override
   State<StatefulWidget> createState() {
@@ -25,13 +34,59 @@ class DashboardScreen extends StatefulWidget {
 }
 
 class _DashboardScreen extends BaseStateWidget<DashboardScreen>
+    with SingleTickerProviderStateMixin
     implements DashboardNavigator {
   late DashboardViewModel _viewModel;
+
+  late TabController tabController;
+
+  late ChipsWidget _rsChips;
+  late ChipsWidget _clinicChips;
+  late RSClinicWidget _rsListWidget;
+  late RSClinicWidget _clinicListWidget;
+  late BannersWidget _bannersWidget;
 
   @override
   void initState() {
     super.initState();
+    tabController = TabController(length: 2, vsync: this);
     _viewModel = DashboardViewModel().setView(this) as DashboardViewModel;
+    initWidgets();
+    _viewModel.getData();
+  }
+
+  void initWidgets() {
+    _rsChips = ChipsWidget(
+      data: [],
+      isLoading: _viewModel.rsLoadingChip,
+      chipListener: (id) {
+        _rsListWidget.showLoading();
+        _viewModel.reloadRsList(false, id);
+      },
+    );
+
+    _rsListWidget = RSClinicWidget(
+        data: [],
+        isLoading: _viewModel.rsLoadingList,
+        listener: (id) => {underConstructionFunction()});
+
+    _clinicChips = ChipsWidget(
+      data: [],
+      isLoading: _viewModel.clinicLoadingChip,
+      chipListener: (id) {
+        _clinicListWidget.showLoading();
+        _viewModel.reloadClinicList(false, id);
+      },
+    );
+
+    _clinicListWidget = RSClinicWidget(
+        data: [],
+        isLoading: _viewModel.clinicLoadingList,
+        listener: (id) => {underConstructionFunction()});
+
+    _bannersWidget = BannersWidget(data: [],
+        isLoading: true,
+        listener: (id) => {underConstructionFunction()});
   }
 
   @override
@@ -40,23 +95,30 @@ class _DashboardScreen extends BaseStateWidget<DashboardScreen>
     return ChangeNotifierProvider<DashboardViewModel>(
         create: (context) => _viewModel,
         child: Consumer<DashboardViewModel>(
-            builder: (context, viewModel, _) => Scaffold(
-                  backgroundColor: white,
-                  body: ColoredSafeArea(
-                    color: primary,
-                    child: Container(
+            builder: (context, viewModel, _) =>
+                ColoredSafeArea(
+                  color: white,
+                  child: Scaffold(
+                    backgroundColor: white,
+                    body: Container(
                       color: white,
-                      child: Stack(
+                      child: Column(
                         children: [
-                          SingleChildScrollView(
-                            child: Column(
+                          buildToolbar(),
+                          Expanded(
+                            child: Stack(
                               children: [
-                                buildToolbar(),
-                                buildContent(),
+                                SingleChildScrollView(
+                                  child: Column(
+                                    children: [buildMainContent()],
+                                  ),
+                                ),
+                                viewModel.isLoading
+                                    ? LoadingIndicator()
+                                    : Container()
                               ],
                             ),
                           ),
-                          viewModel.isLoading ? LoadingIndicator() : Container()
                         ],
                       ),
                     ),
@@ -64,59 +126,63 @@ class _DashboardScreen extends BaseStateWidget<DashboardScreen>
                 )));
   }
 
+  //region widget
   Widget buildToolbar() {
-    return Container(
-      width: double.infinity,
-      height: AppBar().preferredSize.height,
-      color: primary,
-      child: Row(
+    return Card(
+      margin: EdgeInsets.zero,
+      child: Column(
         children: [
-          SizedBox(
-            width: 20,
-          ),
-          SvgPicture.asset(
-            icLogo,
-            width: 140,
-          ),
-          Expanded(child: SizedBox()),
-          InkWell(
-            onTap: () => navigatePage(notificationRN),
+          Container(
+            width: double.infinity,
+            color: white,
             child: Stack(
-              alignment: Alignment.topRight,
+              alignment: Alignment.center,
               children: [
-                Padding(
-                  padding: EdgeInsets.only(right: 2, top: 2),
-                  child: SvgPicture.asset(icNotificationHome),
+                Center(
+                    child: Text(
+                      "Valbury",
+                      style: BaseStyle.textBold20,
+                    )),
+                Row(
+                  children: [
+                    Image.asset(
+                      imgCompanyLogo,
+                      width: 100,
+                      height: 50,
+                    ),
+                    Expanded(child: SizedBox()),
+                    InkWell(
+                      onTap: () => navigatePage(notificationRN),
+                      child: Stack(
+                        alignment: Alignment.topRight,
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.only(right: 2, top: 2),
+                            child: SvgPicture.asset(icNotificationHome),
+                          ),
+                          CircleBadgeNumber(
+                            number: 6,
+                          )
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      width: 20,
+                    ),
+                  ],
                 ),
-                CircleBadgeNumber(
-                  number: 6,
-                )
               ],
             ),
           ),
-          SizedBox(
-            width: 20,
+          TabBar(
+            labelColor: primaryText,
+            labelStyle: BaseStyle.textSemiBoldPrimary12,
+            controller: tabController,
+            tabs: [
+              Tab(text: "Dashboard"),
+              Tab(text: "Grafik"),
+            ],
           ),
-        ],
-      ),
-    );
-  }
-
-  Widget buildContent() {
-    return Container(
-      width: double.infinity,
-      color: Colors.transparent,
-      child: Stack(
-        children: [
-          SvgPicture.asset(
-            bgHomeOval,
-            width: double.infinity,
-            height: 300,
-            fit: BoxFit.fitHeight,
-          ),
-          topContent(),
-          Container(
-              margin: EdgeInsets.only(top: 225), child: buildMainContent())
         ],
       ),
     );
@@ -127,127 +193,64 @@ class _DashboardScreen extends BaseStateWidget<DashboardScreen>
       width: double.infinity,
       color: Colors.transparent,
       child: Column(
-        children: [buildMenu(), promoSection(), newsSection(), terkelolaSection(), SizedBox(height: 20,)],
-      ),
-    );
-  }
-
-  Widget buildMenu() {
-    return Card(
-      margin: EdgeInsets.only(left: 24, right: 24),
-      child: Container(
-        padding: EdgeInsets.only(left: 6, right: 6),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            itemMenu(icThunder, "Listrik"),
-            itemMenu(icPhone, "Pulsa"),
-            itemMenu(icWater, "Air"),
-            itemMenu(icInternet, "Internet"),
-            itemMenu(icOtherMenuPPOB, "Lainnya"),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget itemMenu(String icon, String text) {
-    return InkWell(
-      onTap: () => print("menuClicked"),
-      child: Container(
-        padding: EdgeInsets.only(left: 12, right: 12, top: 14, bottom: 14),
-        child: Column(
-          children: [
-            SvgPicture.asset(icon),
-            SizedBox(
-              height: 6,
-            ),
-            Text(
-              text,
-              style: BaseStyle.textRegular12,
-            )
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget topContent() {
-    return Container(
-      padding: EdgeInsets.only(left: 24, right: 24, top: 28),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              SvgPicture.asset(
-                icHomePlace,
-                width: 18,
-              ),
-              SizedBox(
-                width: 4,
-              ),
-              Text(
-                "Perumahan Permai Indah",
-                style: BaseStyle.textRegularWhite14,
-              ),
-            ],
-          ),
+          rsSection(),
+          SizedBox(height: 16,),
+          _bannersWidget,
+          clinicSection(),
           SizedBox(
-            height: 24,
-          ),
-          Text(
-            "Halo Faiz, Iuran Tagihan Anda bulan ini",
-            style: BaseStyle.textSemiBoldWhite18,
-          ),
-          SizedBox(
-            height: 6,
-          ),
-          Text(
-            "Rp. 150.000",
-            style: BaseStyle.textRegularWhite18,
-          ),
-          SizedBox(
-            height: 12,
-          ),
-          ElevatedButton(
-            onPressed: () => print("clicked "),
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Text(
-                  "Bayar",
-                  style: BaseStyle.textSemiBoldPrimary16,
-                ),
-                SizedBox(
-                  width: 4,
-                ),
-                Icon(
-                  Icons.chevron_right,
-                  color: primary,
-                )
-              ],
-            ),
-            style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.all(white),
-                padding: MaterialStateProperty.all(
-                    EdgeInsets.only(left: 16, right: 6, top: 6, bottom: 6))),
-          ),
+            height: 20,
+          )
         ],
       ),
     );
   }
 
-  Widget promoSection() {
+  Widget rsSection() {
     return Container(
       width: double.infinity,
       padding: EdgeInsets.only(top: 16),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          titleSection("Promo"),
-          PromoListWidget(data: [], isLoading: true)
+          Row(
+            children: [
+              titleSection("Rumah Sakit"),
+              Expanded(child: SizedBox()),
+              seeAllSection("Lihat Semua", () => underConstructionFunction())
+            ],
+          ),
+          SizedBox(
+            height: 8,
+          ),
+          _rsChips,
+          SizedBox(height: 12,),
+          _rsListWidget
+        ],
+      ),
+    );
+  }
+
+  Widget clinicSection() {
+    return Container(
+      width: double.infinity,
+      padding: EdgeInsets.only(top: 16),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              titleSection("Klinik"),
+              Expanded(child: SizedBox()),
+              seeAllSection("Lihat Semua", () => underConstructionFunction())
+            ],
+          ),
+          SizedBox(
+            height: 8,
+          ),
+          _clinicChips,
+          SizedBox(height: 12,),
+          _clinicListWidget
         ],
       ),
     );
@@ -255,7 +258,7 @@ class _DashboardScreen extends BaseStateWidget<DashboardScreen>
 
   Widget titleSection(String text) {
     return Container(
-      margin:EdgeInsets.only(left: 24, bottom: 6),
+      margin: EdgeInsets.only(left: 24, bottom: 6),
       child: Text(
         text,
         style: BaseStyle.textBold16,
@@ -263,31 +266,73 @@ class _DashboardScreen extends BaseStateWidget<DashboardScreen>
     );
   }
 
-  newsSection() {
+  Widget seeAllSection(String text, Function() action) {
+    return InkWell(
+      onTap: () => action.call(),
+      child: Container(
+        margin: EdgeInsets.only(bottom: 6, right: 24),
+        child: Text(
+          text,
+          style: BaseStyle.textSemiBold12,
+        ),
+      ),
+    );
+  }
+
+  Widget bannerSection() {
     return Container(
       width: double.infinity,
       padding: EdgeInsets.only(top: 16),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          titleSection("Berita"),
-          NewsListWidget(data: [], isLoading: true)
         ],
       ),
     );
   }
 
-  Widget terkelolaSection() {
+  Widget valburySection() {
     return Container(
       width: double.infinity,
       padding: EdgeInsets.only(top: 16),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          titleSection("Lebih dekat dengan Terkelola"),
-          NewsListWidget(data: [], isLoading: true)
+          titleSection("Lebih dekat dengan Valbury"),
+          // BannersWidgeget(data: [], isLoading: true)
         ],
       ),
     );
+  }
+
+  //endregion
+
+  underConstructionFunction() {
+    ScreenUtils.showToastMessage(txt("under_construction"));
+  }
+
+  @override
+  void populateRsChips(List<Chips> dummyChips) {
+    _rsChips.addData(dummyChips);
+  }
+
+  @override
+  void populateRsList(List<RSClinic> dummyRs) {
+    _rsListWidget.addData(dummyRs);
+  }
+
+  @override
+  void populateBannerList(List<Banners> dummyBanners) {
+    _bannersWidget.addData(dummyBanners);
+  }
+
+  @override
+  void populateClinicChips(List<Chips> dummyChips) {
+    _clinicChips.addData(dummyChips);
+  }
+
+  @override
+  void populateClinicList(List<RSClinic> dummyClinic) {
+    _clinicListWidget.addData(dummyClinic);
   }
 }

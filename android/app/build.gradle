@@ -33,7 +33,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "id.co.terkelola.app"
+        applicationId "id.co.valburytest.app"
         minSdkVersion 19
         targetSdkVersion 30
         versionCode flutterVersionCode.toInteger()
@@ -41,20 +41,47 @@ android {
         multiDexEnabled true
     }
 
+    signingConfigs {
+        release {
+            applicationVariants.all { variant ->
+                variant.outputs.all {
+                    outputFileName = "app-${variant.getName()}.apk"
+                }
+            }
+        }
+    }
+
     buildTypes {
         debug {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
         release {
-            // TODO: Add your own signing config for the release build.
-            // Signing with the debug keys for now, so `flutter run --release` works.
-            signingConfig signingConfigs.debug
+            signingConfig signingConfigs.release
 
-            minifyEnabled false
-            shrinkResources false
+            minifyEnabled true
+            shrinkResources true
 
             useProguard true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt')
+        }
+    }
+
+    flavorDimensions "app"
+
+    productFlavors {
+        dev {
+            dimension "app"
+            versionNameSuffix "-dev"
+            applicationId "id.co.valburytest.app.dev"
+        }
+        stag {
+            dimension "app"
+            versionNameSuffix "-stag"
+            applicationId "id.co.valburytest.app.staging"
+        }
+        prod {
+            dimension "app"
+            applicationId "id.co.valburytest.app"
         }
     }
 }

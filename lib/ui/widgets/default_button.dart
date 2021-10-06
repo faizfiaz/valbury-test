@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:terkelola/constants/colors.dart';
+import 'package:valburytest/constants/colors.dart';
 
 class DefaultButton {
   static Widget redButton(

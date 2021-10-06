@@ -1,7 +1,5 @@
 class NotificationItem {
-  String name;
   String picture;
-  String month;
   String title;
   String message;
   bool isRead;
@@ -10,9 +8,7 @@ class NotificationItem {
   String date;
 
   NotificationItem(
-      {required this.name,
-      required this.picture,
-      required this.month,
+      {required this.picture,
       required this.title,
       required this.message,
       this.isRead = false,
