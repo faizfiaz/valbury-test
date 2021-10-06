@@ -1,8 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:valburytest/commons/base_state_widget.dart';
+import 'package:valburytest/commons/nav_key.dart';
 import 'package:valburytest/commons/screen_utils.dart';
 import 'package:valburytest/model/entity/banners.dart';
+import 'package:valburytest/ui/widgets/custom_scroll_web.dart';
 import 'package:valburytest/ui/widgets/shimmer_grey.dart';
 
 class BannersWidget extends StatefulWidget {
@@ -49,13 +51,20 @@ class _BannersWidget extends BaseStateWidget<BannersWidget> {
   Widget renderListData() {
     return SizedBox(
       height: 160,
-      child: ListView.builder(
-          scrollDirection: Axis.horizontal,
-          itemCount: widget.data.length,
-          itemBuilder: (context, index) {
-            return renderItem(index, widget.data[index]);
-          }),
+      child: NavKey.isRunningWeb ? ScrollConfiguration(
+        behavior: CustomScrollWeb(),
+        child: buildList(),
+      ) : buildList(),
     );
+  }
+
+  Widget buildList() {
+    return ListView.builder(
+        scrollDirection: Axis.horizontal,
+        itemCount: widget.data.length,
+        itemBuilder: (context, index) {
+          return renderItem(index, widget.data[index]);
+        });
   }
 
   Widget skeletonWidget() {
@@ -83,7 +92,14 @@ class _BannersWidget extends BaseStateWidget<BannersWidget> {
       clipBehavior: Clip.antiAliasWithSaveLayer,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
       child: Container(
-          width: ScreenUtils.getScreenWidth(context) - 120, height: 160, child: Image.asset(data.imageBanner, fit: BoxFit.cover,)),
+          width: NavKey.isRunningWeb
+              ? NavKey.widthWeb - 120
+              : ScreenUtils.getScreenWidth(context) - 120,
+          height: 160,
+          child: Image.asset(
+            data.imageBanner,
+            fit: BoxFit.cover,
+          )),
     );
   }
 }

@@ -96,30 +96,54 @@ class UserPreferences {
   }
 
   Future<bool> setDataUser(RequestUser requestUser) async {
-    final secureStorage = FlutterSecureStorage();
     String userData = json.encode(requestUser.toJson());
     final key = Key.fromUtf8(_hk);
     final iv = IV.fromLength(16);
 
     final _e = Encrypter(AES(key));
     final _edr = _e.encrypt(userData, iv: iv);
-    await secureStorage.write(key: user_key, value: _edr.base64);
-    return true;
+    if (NavKey.isRunningWeb) {
+      final SharedPreferences preferences =
+      await SharedPreferences.getInstance();
+      preferences.setString(user_key, _edr.base64);
+      return true;
+    }  else {
+      final secureStorage = FlutterSecureStorage();
+      await secureStorage.write(key: user_key, value: _edr.base64);
+      return true;
+    }
   }
 
   Future<RequestUser?> getDataUser() async {
-    final secureStorage = FlutterSecureStorage();
-    String? data = await secureStorage.read(key: user_key);
-    if (data != null) {
-      final key = Key.fromUtf8(_hk);
-      final iv = IV.fromLength(16);
+    if (NavKey.isRunningWeb) {
+      final SharedPreferences preferences =
+      await SharedPreferences.getInstance();
+      String? data = preferences.getString(token_key);
+      if (data != null) {
+        final key = Key.fromUtf8(_hk);
+        final iv = IV.fromLength(16);
 
-      final _e = Encrypter(AES(key));
-      final _dctr = _e.decrypt64(data, iv: iv);
-      Map userMap = json.decode(_dctr);
-      return RequestUser.fromJson(userMap);
+        final _e = Encrypter(AES(key));
+        final _dctr = _e.decrypt64(data, iv: iv);
+        Map userMap = json.decode(_dctr);
+        return RequestUser.fromJson(userMap);
+      } else {
+        return Future.value(null);
+      }
     } else {
-      return Future.value(null);
+      final secureStorage = FlutterSecureStorage();
+      String? data = await secureStorage.read(key: user_key);
+      if (data != null) {
+        final key = Key.fromUtf8(_hk);
+        final iv = IV.fromLength(16);
+
+        final _e = Encrypter(AES(key));
+        final _dctr = _e.decrypt64(data, iv: iv);
+        Map userMap = json.decode(_dctr);
+        return RequestUser.fromJson(userMap);
+      } else {
+        return Future.value(null);
+      }
     }
   }
 

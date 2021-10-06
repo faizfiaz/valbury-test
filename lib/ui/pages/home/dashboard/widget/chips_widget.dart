@@ -2,9 +2,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:valburytest/commons/base_state_widget.dart';
+import 'package:valburytest/commons/nav_key.dart';
 import 'package:valburytest/constants/colors.dart';
 import 'package:valburytest/constants/styles.dart';
 import 'package:valburytest/model/entity/chips.dart';
+import 'package:valburytest/ui/widgets/custom_scroll_web.dart';
 
 class ChipsWidget extends StatefulWidget {
   final List<Chips> data;
@@ -47,14 +49,21 @@ class _ChipsWidget extends BaseStateWidget<ChipsWidget> {
   Widget renderListData() {
     return SizedBox(
       height: 30,
-      child: ListView.builder(
-        controller: _scrollController,
-          scrollDirection: Axis.horizontal,
-          itemCount: widget.data.length,
-          itemBuilder: (context, index) {
-            return renderItemChip(index, widget.data[index]);
-          }),
+      child: NavKey.isRunningWeb ? ScrollConfiguration(
+        behavior: CustomScrollWeb(),
+        child: buildList(),
+      ) : buildList(),
     );
+  }
+
+  Widget buildList() {
+    return ListView.builder(
+        controller: _scrollController,
+        scrollDirection: Axis.horizontal,
+        itemCount: widget.data.length,
+        itemBuilder: (context, index) {
+          return renderItemChip(index, widget.data[index]);
+        });
   }
 
   Widget skeletonWidget() {
@@ -118,4 +127,6 @@ class _ChipsWidget extends BaseStateWidget<ChipsWidget> {
     });
     widget.chipListener.call(id);
   }
+
+
 }

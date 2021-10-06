@@ -38,6 +38,8 @@ class _LoginScreen extends BaseStateWidget<LoginScreen>
     _viewModel = LoginViewModel().setView(this) as LoginViewModel;
     if (NavKey.isRunningWeb) {
       _viewModel.checkToken();
+      _viewModel.changeLanguage(context);
+      _viewModel.changeLanguage(context);
     }
   }
 
